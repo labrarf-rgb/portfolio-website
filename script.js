@@ -21,19 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Toggle light mode' : 'Toggle dark mode');
     });
 
-    // Contact Form Logic Placeholder
     const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value
-        };
 
-        console.log('Form Submitted Locally:', formData);
-        alert('Thank you! The form was processed (check browser console for output).');
-        contactForm.reset();
+        const response = await fetch('https://formspree.io/f/mlgvpwqy', {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            alert('Message sent!');
+            contactForm.reset();
+        } else {
+            alert('Something went wrong. Please try again.');
+        }
     });
 });

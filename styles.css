@@ -234,6 +234,134 @@ li::before {
     margin-top: 0.5rem;
 }
 
+.card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-link:hover .card {
+    background-color: var(--bg);
+}
+
+/* ── Project Detail Page ── */
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.project-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    border: 1px solid var(--accent-warm);
+    border-radius: 2px;
+    padding: 0.2rem 0.6rem;
+}
+
+.embed-section {
+    padding: 64px 0 96px;
+}
+
+.embed-section h2 {
+    margin-bottom: 1.5rem;
+}
+
+.embed-wrapper {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: var(--surface);
+    display: flex;
+    flex-direction: column;
+}
+
+.embed-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg);
+    flex-shrink: 0;
+}
+
+.embed-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.embed-btn:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+}
+
+.embed-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 720px;
+    border: none;
+    flex: 1;
+}
+
+.embed-wrapper:fullscreen iframe {
+    height: 100%;
+}
+
+.embed-wrapper:fullscreen {
+    background-color: var(--bg);
+}
+
+.embed-fallback {
+    display: none;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.back-link {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--text);
+}
+
+.back-link svg {
+    flex-shrink: 0;
+}
+
 /* ── Form ── */
 .form-group { margin-bottom: 1.5rem; }
 
@@ -259,6 +387,7 @@ input, textarea {
     font-weight: 300;
     transition: border-color 0.2s ease;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 input::placeholder, textarea::placeholder {

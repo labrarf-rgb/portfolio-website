@@ -249,9 +249,13 @@ li::before {
 }
 
 .card-link {
-    display: block;
+    display: flex;
     text-decoration: none;
     color: inherit;
+}
+
+.card-link .card {
+    flex: 1;
 }
 
 .view-all-link {

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Health Score Dashboard — Ray Labra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none;">Ray Labra</a>
+            <div class="header-actions">
+                <a href="projects.html" class="social-link" aria-label="Projects" title="Projects">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/labrarf/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Project Header -->
+        <section class="section">
+            <a href="index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to portfolio
+            </a>
+
+            <span class="section-label">Featured Project</span>
+            <h1>Customer Health Score Dashboard</h1>
+
+            <div class="project-meta">
+                <span class="project-tag">Customer Success</span>
+                <span class="project-tag">Dashboard</span>
+                <span class="project-tag">Web App</span>
+                <span class="project-tag">Vanilla JS</span>
+            </div>
+
+            <p>A single-file CSM portfolio dashboard for tracking account health, renewal risk, and expansion signals across an entire book of business. Built for Customer Success Managers who need a fast, opinionated answer to one question: <em>which accounts need attention right now?</em></p>
+
+            <h2>What it does</h2>
+            <ul>
+                <li><strong>Weighted health scoring.</strong> Each account is scored 0–100 across five leading indicators — Product Engagement, Support Health, Stakeholder Engagement, Adoption Depth, and Expansion Signal — using a configurable weighted average that reflects what actually predicts churn or expansion.</li>
+                <li><strong>Account table with renewal tracking.</strong> View your entire book of business at a glance, with per-metric bar breakdowns and renewal dates that highlight red (within 60 days) or yellow (within 120 days) so nothing slips through.</li>
+                <li><strong>Account detail panel.</strong> Click any row to open an animated arc gauge and per-metric sliders you can adjust in real time — the health score and table update instantly, letting you model scenarios on the fly.</li>
+                <li><strong>CSV import and export.</strong> Drag-and-drop upload with auto-mapped column headers and a correction UI for mismatches. Export the full portfolio with calculated scores for stakeholder reporting.</li>
+                <li><strong>Configurable settings.</strong> Adjust metric weights, Healthy and At Risk score thresholds, and light/dark theme — all persisted to localStorage so the dashboard reflects your team's model, not a generic one.</li>
+            </ul>
+
+            <h2>How the scoring model works</h2>
+            <p>Five metrics, each scored 0–100, combined into a single weighted health score:</p>
+            <ul>
+                <li><strong>Product Engagement (30%).</strong> Login frequency, feature usage, and DAU/MAU ratio.</li>
+                <li><strong>Support Health (20%).</strong> Inverse of ticket volume plus CSAT score.</li>
+                <li><strong>Stakeholder Engagement (20%).</strong> QBR attendance, executive sponsor access, and responsiveness.</li>
+                <li><strong>Adoption Depth (15%).</strong> Core feature penetration and seat utilization.</li>
+                <li><strong>Expansion Signal (15%).</strong> NPS score, upsell conversations, and usage against limits.</li>
+            </ul>
+            <p>Scores fall into three bands: Healthy (75–100), At Risk (50–74), or Critical (&lt;50). Both the weights and thresholds are configurable from the Settings panel.</p>
+        </section>
+
+        <!-- CTA -->
+        <section class="embed-section">
+            <span class="section-label">Live Demo</span>
+            <h2>Try it yourself</h2>
+            <p>The dashboard is fully interactive. Add accounts, adjust metric scores, import a CSV, or tune the scoring weights in Settings to see how the model responds.</p>
+            <a href="customer-health-score-app.html" target="_blank" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

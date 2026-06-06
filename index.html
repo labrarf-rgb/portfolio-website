@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ray Labra — Product Manager with a background in IT operations, B2B SaaS sales, account management, and product marketing.">
     <title>Ray Labra — Product Manager</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <div class="nav-container">
             <span class="logo">Ray Labra</span>
-            <div class="header-actions">
+            <nav class="header-actions" aria-label="Site navigation">
                 <a href="projects.html" class="social-link" aria-label="Projects" title="Projects">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="3" width="7" height="7"></rect>
@@ -42,30 +44,31 @@
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
                 </button>
-            </div>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
+    <main id="main-content" class="container">
 
         <!-- About -->
-        <section id="about" class="section">
+        <section id="about" class="section" aria-labelledby="about-heading">
             <span class="section-label">About</span>
-            <h1>Product at the intersection of data, governance, and growth.</h1>
-            <p>I'm a Product Manager who sits comfortably at the intersection of technical depth and commercial thinking. My background pulls from data analytics, IT governance, and customer-facing revenue roles. That mix lets me connect engineering teams with business outcomes in a way that feels natural rather than forced. I don't just manage roadmaps; I care about whether what we're building actually lands in the market.</p>
+            <h1 id="about-heading">Product at the intersection of data, governance, and growth.</h1>
+            <p class="tagline">Rigorous by training. Commercial by instinct.</p>
+            <p>I'm a Product Manager who came up through IT operations before spending close to a decade on the commercial side of a B2B SaaS company, moving through software demos, account management, product marketing, and into product management. Most PMs inherit a roadmap. I walked the whole path first. I know what it costs to sell a product honestly, what it takes to support it at scale, and what customers actually mean when they push back.</p>
 
             <h2>Why this combination works</h2>
-            <ul>
-                <li><strong>I lead with data.</strong> My foundation in Medical Physics and Data Analytics means I'm used to working with complex systems and messy numbers. When I push for a product decision, there's evidence behind it.</li>
-                <li><strong>I've been on the customer side.</strong> Having worked in account execution and revenue roles, I know where users actually get stuck and what makes them stay. I don't build features in a vacuum; I build them with adoption and real-world use in mind.</li>
-                <li><strong>I think about scale early.</strong> My ITIL and COBIT 5 certifications aren't just credentials. They reflect how I approach product work: making sure the operations and governance behind a growing product don't become an afterthought.</li>
+            <ul role="list">
+                <li><strong>I build from evidence.</strong> I treat gut feel as a hypothesis, not a conclusion. Years of product analytics work mean when I push for a direction, there's a thesis behind it and I can defend it.</li>
+                <li><strong>I've been in the customer's seat.</strong> I spent years in sales, demos, and account management before I owned a roadmap. I don't interpret customer feedback from a distance. I know where users actually get stuck, what makes them stay, and how that translates into what to build.</li>
+                <li><strong>I've worked every side of the table.</strong> Moving through IT operations, sales, product marketing, and product management means I understand what each function needs from a product. Cross-functional alignment isn't a skill I trained for, it's how I've always had to operate. That breadth also means I think about scale, operations, and governance early, before they become someone else's problem.</li>
             </ul>
         </section>
 
         <!-- Projects -->
-        <section id="projects" class="section">
+        <section id="projects" class="section" aria-labelledby="projects-heading">
             <span class="section-label">Work</span>
-            <h2>Featured Projects</h2>
+            <h2 id="projects-heading">Featured Projects</h2>
             <div class="grid">
                 <a href="unifycrm.html" class="card-link">
                     <div class="card">
@@ -90,17 +93,17 @@
         </section>
 
         <!-- Contact -->
-        <section id="contact" class="section">
+        <section id="contact" class="section" aria-labelledby="contact-heading">
             <span class="section-label">Contact</span>
-            <h2>Get in touch</h2>
+            <h2 id="contact-heading">Get in touch</h2>
             <form id="contact-form" action="https://formspree.io/f/mlgvpwqy" method="POST">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required autocomplete="name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required autocomplete="email">
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>

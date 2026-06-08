@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRIFTS Calculator | Ray Labra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none;">Ray Labra</a>
+            <div class="header-actions">
+                <a href="projects.html" class="social-link" aria-label="Projects" title="Projects">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/labrarf/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Project Header -->
+        <section class="section">
+            <a href="index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to portfolio
+            </a>
+
+            <span class="section-label">Featured Project</span>
+            <h1>DRIFTS Calculator</h1>
+
+            <div class="project-meta">
+                <span class="project-tag">Product & Delivery</span>
+                <span class="project-tag">Cost Modeling</span>
+                <span class="project-tag">Web App</span>
+                <span class="project-tag">Vanilla JS</span>
+            </div>
+
+            <p>An interactive calculator that quantifies the hidden cost of tolerating known problems in product and delivery teams. The core insight: inaction feels free, but it isn't. The costs are invisible, distributed, and easy to rationalize away. DRIFTS makes them visible and puts a number on them — turning "we'll deal with it later" into a figure you can actually weigh.</p>
+
+            <p>It's not a questionnaire. You configure your team context, move a lever for each category, and watch a spider diagram and a dollar range respond live.</p>
+
+            <h2>The six categories</h2>
+            <p>DRIFTS is a framework for the six distinct ways product and delivery teams quietly bleed capacity. The categories aren't independent — they amplify each other.</p>
+            <ul>
+                <li><strong>D — Decision Drag.</strong> Decisions that stall or never get made: analysis paralysis, unclear ownership, sprints losing days to approvals.</li>
+                <li><strong>R — Rework from Unclear Requirements.</strong> Vague tickets and missing acceptance criteria. The problem starts before a line of code is written.</li>
+                <li><strong>I — Invalid Assumptions Shipped.</strong> Building what nobody validated. Features that miss the mark because the bet was never tested.</li>
+                <li><strong>F — Fragmented Priorities.</strong> Mid-sprint scope changes and a roadmap nobody trusts or follows.</li>
+                <li><strong>T — Technical Debt & Incidents.</strong> Accumulated shortcuts and unplanned work that steal sprint capacity that wasn't on the plan.</li>
+                <li><strong>S — Slow Feedback Loops.</strong> Long release cycles and no instrumentation — the cost of learning slowly, or not at all.</li>
+            </ul>
+
+            <h2>How the cost model works</h2>
+            <p>The number has to survive scrutiny, so the engine is built around a few deliberate principles:</p>
+            <ul>
+                <li><strong>A finite capacity pool.</strong> Five categories (D, R, I, F, T) draw from a single pool of team capacity that's proportionally normalized — so the internal-capacity total can never exceed the team's fully-loaded payroll. A hard architectural ceiling.</li>
+                <li><strong>Market time kept separate.</strong> Slow Feedback (S) measures time lost building in the wrong direction, not payroll. It's reported as its own line, outside the pool and the ceiling, so the two kinds of loss are never conflated.</li>
+                <li><strong>Raw-dominant ledger.</strong> Each category shows its raw cost prominently, so making one problem worse never visibly shrinks another — monotonicity stays visible.</li>
+                <li><strong>Stage-based smart defaults.</strong> Company stage sets headcount, salary baselines, sprint length, and feature volume; a region selector shifts salaries. Everything is editable inline.</li>
+                <li><strong>Transparent assumptions.</strong> Every number driving the model is exposed and tunable in a Settings panel. Users who tune it get a sharper number; users who don't still get a credible default. Either way, the calculator earns its number.</li>
+            </ul>
+            <p>The whole thing is a single self-contained HTML file — no build step, no dependencies, no backend.</p>
+        </section>
+
+        <!-- CTA -->
+        <section class="embed-section">
+            <span class="section-label">Live Demo</span>
+            <h2>Try it yourself</h2>
+            <p>Fully interactive. Set your team, move the levers for each category, and watch the spider diagram and the cost range update in real time. Open the Settings panel to tune any assumption behind the model.</p>
+            <a href="drifts-calculator-app.html" target="_blank" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

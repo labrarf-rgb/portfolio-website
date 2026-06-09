@@ -68,31 +68,31 @@
                 <span class="project-tag">Vanilla JS</span>
             </div>
 
-            <p>An interactive calculator that quantifies the hidden cost of tolerating known problems in product and delivery teams. The core insight: inaction feels free, but it isn't. The costs are invisible, distributed, and easy to rationalize away. DRIFTS makes them visible and puts a number on them — turning "we'll deal with it later" into a figure you can actually weigh.</p>
+            <p>An interactive calculator that quantifies the hidden cost of tolerating known problems in product and delivery teams. The core insight: inaction feels free, but it isn't. The costs are invisible, distributed, and easy to rationalize away. DRIFTS makes them visible and puts a number on them, turning "we'll deal with it later" into a figure you can actually weigh.</p>
 
             <p>It's not a questionnaire. You configure your team context, move a lever for each category, and watch a spider diagram and a dollar range respond live.</p>
 
             <h2>The six categories</h2>
-            <p>DRIFTS is a framework for the six distinct ways product and delivery teams quietly bleed capacity. The categories aren't independent — they amplify each other.</p>
+            <p>DRIFTS is a framework for the six distinct ways product and delivery teams quietly bleed capacity. The categories aren't independent; they amplify each other.</p>
             <ul>
-                <li><strong>D — Decision Drag.</strong> Decisions that stall or never get made: analysis paralysis, unclear ownership, sprints losing days to approvals.</li>
-                <li><strong>R — Rework from Unclear Requirements.</strong> Vague tickets and missing acceptance criteria. The problem starts before a line of code is written.</li>
-                <li><strong>I — Invalid Assumptions Shipped.</strong> Building what nobody validated. Features that miss the mark because the bet was never tested.</li>
-                <li><strong>F — Fragmented Priorities.</strong> Mid-sprint scope changes and a roadmap nobody trusts or follows.</li>
-                <li><strong>T — Technical Debt & Incidents.</strong> Accumulated shortcuts and unplanned work that steal sprint capacity that wasn't on the plan.</li>
-                <li><strong>S — Slow Feedback Loops.</strong> Long release cycles and no instrumentation — the cost of learning slowly, or not at all.</li>
+                <li><strong>D: Decision Drag.</strong> Decisions that stall or never get made: analysis paralysis, unclear ownership, sprints losing days to approvals.</li>
+                <li><strong>R: Rework from Unclear Requirements.</strong> Vague tickets and missing acceptance criteria. The problem starts before a line of code is written.</li>
+                <li><strong>I: Invalid Assumptions Shipped.</strong> Building what nobody validated. Features that miss the mark because the bet was never tested.</li>
+                <li><strong>F: Fragmented Priorities.</strong> Mid-sprint scope changes and a roadmap nobody trusts or follows.</li>
+                <li><strong>T: Technical Debt & Incidents.</strong> Accumulated shortcuts and unplanned work that steal sprint capacity that wasn't on the plan.</li>
+                <li><strong>S: Slow Feedback Loops.</strong> Long release cycles and no instrumentation, the cost of learning slowly, or not at all.</li>
             </ul>
 
             <h2>How the cost model works</h2>
             <p>The number has to survive scrutiny, so the engine is built around a few deliberate principles:</p>
             <ul>
-                <li><strong>A finite capacity pool.</strong> Five categories (D, R, I, F, T) draw from a single pool of team capacity that's proportionally normalized — so the internal-capacity total can never exceed the team's fully-loaded payroll. A hard architectural ceiling.</li>
+                <li><strong>A finite capacity pool.</strong> Five categories (D, R, I, F, T) draw from a single pool of team capacity that's proportionally normalized, so the internal-capacity total can never exceed the team's fully-loaded payroll. A hard architectural ceiling.</li>
                 <li><strong>Market time kept separate.</strong> Slow Feedback (S) measures time lost building in the wrong direction, not payroll. It's reported as its own line, outside the pool and the ceiling, so the two kinds of loss are never conflated.</li>
-                <li><strong>Raw-dominant ledger.</strong> Each category shows its raw cost prominently, so making one problem worse never visibly shrinks another — monotonicity stays visible.</li>
+                <li><strong>Raw-dominant ledger.</strong> Each category shows its raw cost prominently, so making one problem worse never visibly shrinks another; monotonicity stays visible.</li>
                 <li><strong>Stage-based smart defaults.</strong> Company stage sets headcount, salary baselines, sprint length, and feature volume; a region selector shifts salaries. Everything is editable inline.</li>
                 <li><strong>Transparent assumptions.</strong> Every number driving the model is exposed and tunable in a Settings panel. Users who tune it get a sharper number; users who don't still get a credible default. Either way, the calculator earns its number.</li>
             </ul>
-            <p>The whole thing is a single self-contained HTML file — no build step, no dependencies, no backend.</p>
+            <p>The whole thing is a single self-contained HTML file: no build step, no dependencies, no backend.</p>
         </section>
 
         <!-- CTA -->

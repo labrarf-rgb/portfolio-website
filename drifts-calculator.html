@@ -86,7 +86,7 @@
             <h2>How the cost model works</h2>
             <p>The number has to survive scrutiny, so the engine is built around a few deliberate principles:</p>
             <ul>
-                <li><strong>A finite capacity pool.</strong> Five categories (D, R, I, F, T) draw from a single pool of team capacity that's proportionally normalized, so the internal-capacity total can never exceed the team's fully-loaded payroll. A hard architectural ceiling.</li>
+                <li><strong>A finite capacity pool.</strong> Five categories (D, R, I, F, T) compound against a single pool of team capacity; each consumes a share of what the others leave behind, so overlapping causes are never double-counted and the internal-capacity total can approach but never exceed the team's fully-loaded payroll. A hard architectural ceiling.</li>
                 <li><strong>Market time kept separate.</strong> Slow Feedback (S) measures time lost building in the wrong direction, not payroll. It's reported as its own line, outside the pool and the ceiling, so the two kinds of loss are never conflated.</li>
                 <li><strong>Raw-dominant ledger.</strong> Each category shows its raw cost prominently, so making one problem worse never visibly shrinks another; monotonicity stays visible.</li>
                 <li><strong>Stage-based smart defaults.</strong> Company stage sets headcount, salary baselines, sprint length, and feature volume; a region selector shifts salaries. Everything is editable inline.</li>

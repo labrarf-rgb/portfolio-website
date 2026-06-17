@@ -377,7 +377,7 @@ li::before {
 }
 
 .embed-section {
-    padding: 64px 0 96px;
+    padding: 24px 0 96px;
 }
 
 .embed-section h2 {
@@ -543,6 +543,8 @@ textarea { resize: vertical; min-height: 120px; }
 
 .btn:hover { opacity: 0.75; }
 .btn:active { transform: scale(0.98); }
+
+.btn-top { margin-bottom: 2.75rem; }
 
 /* ── Mobile ── */
 @media (max-width: 600px) {

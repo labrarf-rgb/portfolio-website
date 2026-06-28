@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoria | Ray Labra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none;">Ray Labra</a>
+            <div class="header-actions">
+                <a href="projects.html" class="social-link" aria-label="Projects" title="Projects">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/labrarf/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Project Header -->
+        <section class="section">
+            <a href="index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to portfolio
+            </a>
+
+            <span class="section-label">Featured Project</span>
+            <h1>Estoria</h1>
+
+            <div class="project-meta">
+                <span class="project-tag">Prototype</span>
+                <span class="project-tag">Writing Tool</span>
+                <span class="project-tag">Web App</span>
+                <span class="project-tag">React</span>
+            </div>
+
+            <a href="estoria-app.html" target="_blank" class="btn btn-top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+
+            <p>I write fiction, and the more ambitious a story got, the harder it became to hold all of it in my head. Characters multiply, the world fills in, timelines branch, and the small details that matter later are easy to lose track of. A plain document never made that any easier; it just gave me more to scroll through.</p>
+
+            <p>The harder problem was time away. Step back from a story for a few weeks and you lose the thread: what a character knew at a given point, why you made a particular choice, the idea you meant to circle back to and never wrote down. I wanted a single place that held all of it for me, the people, the places, the timeline, and the reasoning behind the plot, so coming back to a story felt like returning to a desk I had left organized rather than starting over. I built Estoria for myself first, and if it helps other writers keep their stories straight, even better.</p>
+
+            <p>Estoria is a visual story-mapping tool for novelists. You arrange chapters as cards on an infinite canvas, map the scenes inside each chapter, keep characters and worldbuilding close at hand, and export the whole thing as clean markdown ready for an Obsidian vault. It is meant to feel like a calm, papery desk tool rather than a busy piece of software, so the story stays in front of you and the interface gets out of the way.</p>
+
+            <h2>Structure without the blank page</h2>
+            <p>Plotting from nothing is the hardest part of starting, so Estoria leans on methods writers already trust. It ships with skeletons drawn from well-known story-structure frameworks, including the Hero's Journey, Save the Cat, Dan Harmon's Story Circle, and Kishotenketsu, among others. Pick one and the chapters and beats are laid out for you to adapt, so you start from a proven shape and shape it to your story instead of facing an empty canvas.</p>
+            <p>From there the canvas keeps the logic of the story visible. Inside a chapter you lay out its scenes and connect them by how each one leads into the next, so the cause and effect of the plot stays in view as the story grows instead of getting buried in prose.</p>
+
+            <h2>What it does</h2>
+            <ul>
+                <li><strong>Infinite story board.</strong> Chapters are cards you pan, zoom, drag, and auto-arrange. Switch between a free-form map and a timeline view with act bands, so you can work on shape or on sequence depending on what you need.</li>
+                <li><strong>Scene-level mapping.</strong> Open any chapter into its own canvas and lay out its beats, connecting each scene to the next so the flow of the story stays clear instead of living in your head.</li>
+                <li><strong>Characters and worldbuilding.</strong> Keep rich reference records for the people and places in your story, and link each one into the chapters where it actually appears, so the cast and the world are never more than a click away.</li>
+                <li><strong>Timelines and series planning.</strong> Lay a book out in reading order on the timeline, or zoom out above a single book to plan a whole multi-book series, with its own map, timeline, and connections between books.</li>
+                <li><strong>Draft versions.</strong> Each book carries named versions, so a chapter can hold an alternate title or summary for a different draft without ever losing the base text.</li>
+                <li><strong>Structure templates.</strong> Start from skeletons drawn from well-known story-structure methods, or from a single blank chapter when you would rather build it yourself.</li>
+                <li><strong>Markdown import and export.</strong> Paste or attach a manuscript outline and have it parsed into a working board, then export everything as Obsidian-ready markdown with wikilinks already in place.</li>
+            </ul>
+
+            <h2>How it's built</h2>
+            <p>Estoria is local-first by design. Everything autosaves to your browser as you work, and you can export a project file or a markdown vault at any time. There is no account and no backend to sign up for, which keeps the tool fast and keeps your manuscript yours. The whole thing is built so a cloud sync layer could be added later without changing how the planning works today.</p>
+            <p>Built with Vite, React, TypeScript, Zustand, and Tailwind.</p>
+        </section>
+
+        <!-- CTA -->
+        <section class="embed-section">
+            <span class="section-label">Live Demo</span>
+            <h2>Try it yourself</h2>
+            <p>The prototype is live and interactive. Drop chapters on the board, open one to map its scenes, browse the structure templates, or load the sample novel to see a full story already mapped out.</p>
+            <a href="estoria-app.html" target="_blank" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

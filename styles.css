@@ -71,6 +71,12 @@ h2 {
     margin-bottom: 1.25rem;
 }
 
+/* Give section sub-headings room when they follow body copy */
+p + h2,
+ul + h2 {
+    margin-top: 2.75rem;
+}
+
 h3 {
     font-family: var(--font-body);
     font-size: 0.9rem;

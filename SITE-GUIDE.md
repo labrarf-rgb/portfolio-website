@@ -237,3 +237,11 @@ Newest entries at the bottom.
   and 7). Other embeds (`unifycrm-app`, `drifts-calculator-app`,
   `customer-health-score-app`) still lack it; add the same `allow` if any of
   those apps expose a copy/clipboard action.
+
+### 2026-06-30 - Broaden Estoria audience line
+
+- **Estoria audience.** Changed the "for novelists" framing to "for writers,
+  novelists, screenwriters, storytellers, and everyone in between" so the tool
+  reads as broader than novel-writing. Updated the same lead sentence in three
+  places: the case study (`estoria.html`), the home featured card
+  (`index.html`), and the projects list item (`projects.html`).

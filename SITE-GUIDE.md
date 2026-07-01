@@ -114,6 +114,12 @@ A self-contained page with inline `<style>` that makes a single `<iframe>` fill
 the viewport (`width/height: 100%`, no border, `overflow: hidden`). Only the
 `<title>`, `iframe src`, and `iframe title` change between projects.
 
+Give the iframe `allow="clipboard-write; clipboard-read"` and `allowfullscreen`.
+The embedded app is cross-origin, so any Copy button inside it (which uses
+`navigator.clipboard`) only works if the embed page delegates clipboard
+permission this way. Without it, copy silently fails on www.labrarf.com even
+though it works when the app is opened directly.
+
 ## 6. Formatting and voice conventions (how Ray likes it)
 
 - **No em dashes. Ever.** Hard rule across all copy. Use commas, colons,
@@ -144,7 +150,9 @@ the viewport (`width/height: 100%`, no border, `overflow: hidden`). Only the
 
 1. **Choose a slug** in kebab-case, e.g. `estoria`.
 2. **Create `<slug>-app.html`.** Copy any existing `*-app.html`, then change the
-   `<title>`, the `iframe src` (the live app's URL), and the `iframe title`.
+   `<title>`, the `iframe src` (the live app's URL), and the `iframe title`. Keep
+   `allow="clipboard-write; clipboard-read"` so Copy buttons in the app work when
+   embedded (see the embed-page note in section 5).
 3. **Create `<slug>.html`.** Copy the most recent case study (`estoria.html` is
    the current reference) and update: `<title>`, `h1`, the `project-meta` tags,
    both "Open app" hrefs to `<slug>-app.html`, the intro story, the `h2`
@@ -217,3 +225,15 @@ Newest entries at the bottom.
   drop the returned file in). Updated in the case study, home card, and projects
   item. The "How it's built" line now says you can save a project to a file.
 - **Created this guide** (`SITE-GUIDE.md`) as the context doc for future edits.
+
+### 2026-06-28 - Fix embedded copy button on labrarf.com
+
+- The Copy button in Estoria's Import modal worked locally and when the app was
+  opened directly (github.io) but failed on www.labrarf.com. Cause: the app is
+  embedded cross-origin, and `navigator.clipboard.writeText` is blocked in a
+  cross-origin iframe unless the embed page delegates the permission. Fixed by
+  adding `allow="clipboard-write; clipboard-read"` to the iframe in
+  `estoria-app.html`. Documented as a convention for all embed pages (sections 5
+  and 7). Other embeds (`unifycrm-app`, `drifts-calculator-app`,
+  `customer-health-score-app`) still lack it; add the same `allow` if any of
+  those apps expose a copy/clipboard action.

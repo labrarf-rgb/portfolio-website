@@ -120,6 +120,14 @@ The embedded app is cross-origin, so any Copy button inside it (which uses
 permission this way. Without it, copy silently fails on www.labrarf.com even
 though it works when the app is opened directly.
 
+Know the limits of `allow`: some browser APIs cannot be delegated to a
+cross-origin iframe at all. The File System Access API (folder and file
+pickers, used by Estoria's Back up button) has no `allow` token; Chromium
+simply blocks it in cross-origin frames. Nothing on the embed page can enable
+it, so the app itself must detect the embedded context and fall back (Estoria
+falls back to a normal file download). If a future embedded app needs a
+blocked API, the fallback belongs in the app, not here.
+
 ## 6. Formatting and voice conventions (how Ray likes it)
 
 - **No em dashes. Ever.** Hard rule across all copy. Use commas, colons,
@@ -245,3 +253,18 @@ Newest entries at the bottom.
   reads as broader than novel-writing. Updated the same lead sentence in three
   places: the case study (`estoria.html`), the home featured card
   (`index.html`), and the projects list item (`projects.html`).
+
+### 2026-07-02 - Estoria Back up button in the embed (no portfolio change)
+
+- Ray reported that Estoria's new Back up button showed no folder prompt on
+  www.labrarf.com/estoria-app.html. Cause: the folder picker (File System
+  Access API) is blocked by Chromium inside cross-origin iframes, and unlike
+  clipboard there is no `allow` attribute token to delegate it. Decision: keep
+  the labrarf.com iframe wrapper (Ray wants his URL shown, not github.io), and
+  fix it inside Estoria instead: when embedded, the app hides the folder
+  picker and Back up saves a normal file download. No changes to any portfolio
+  file; documented the `allow` limitation in section 5.
+- Related, when the app is opened directly: Chrome refuses folder picks in
+  system-adjacent locations (home folder root, drive roots) with a "contains
+  system files" message. Estoria now starts the picker in Documents and shows
+  a tip suggesting a normal subfolder like Documents/Estoria Backups.

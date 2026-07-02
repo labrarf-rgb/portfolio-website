@@ -16,8 +16,12 @@
     </style>
 </head>
 <body>
+    <!-- Same-origin copy served from this repo (/estoria/), not the github.io
+         site: a cross-origin iframe cannot show the File System Access folder
+         picker (Estoria's Back up), and no allow token can delegate it.
+         Update the copy with `npm run sync:portfolio` in the estoria repo. -->
     <iframe
-        src="https://labrarf-rgb.github.io/estoria/"
+        src="/estoria/"
         title="Estoria | Visual Story-Mapping Tool for Novelists"
         allow="clipboard-write; clipboard-read"
         allowfullscreen

@@ -18,12 +18,15 @@
         3. Optionally prefill fields via query params, e.g.
            contact.html?name=Ray&email=ray@x.com&message=Hi
 
+      Theme: defaults to light (matching the main labrarf.com site) and only
+      switches to dark when the user clicks the toggle. The choice is saved to
+      localStorage under the shared "theme" key, so it stays in sync with the
+      main site on the same origin. It does NOT auto-follow the device setting.
+
       Android WebView notes:
         - Loads fine from assets (file:///android_asset/contact.html).
         - The submit uses fetch() to Formspree, so the WebView needs internet
           permission and (on file:// origins) JS enabled.
-        - Respects the device dark mode automatically; a manual toggle is
-          also provided and remembered per-origin.
     -->
     <style>
         /* ── Design Tokens ── */
@@ -50,20 +53,6 @@
             --accent-warm:  #4a7060;
             --success:      #6f9c85;
             --error:        #c97d7d;
-        }
-
-        /* Follow the device setting when the user hasn't chosen one. */
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --bg:           #141412;
-                --surface:      #1c1c1a;
-                --text:         #edebe6;
-                --text-muted:   #7a7870;
-                --border:       #2e2d2a;
-                --accent-warm:  #4a7060;
-                --success:      #6f9c85;
-                --error:        #c97d7d;
-            }
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -368,10 +357,8 @@
             try { saved = localStorage.getItem('theme'); } catch (e) {}
 
             function isDark() {
-                var attr = root.getAttribute('data-theme');
-                if (attr) return attr === 'dark';
-                return window.matchMedia &&
-                       window.matchMedia('(prefers-color-scheme: dark)').matches;
+                // Defaults to light like the main site; dark only when chosen.
+                return root.getAttribute('data-theme') === 'dark';
             }
             function syncIcons() {
                 var dark = isDark();

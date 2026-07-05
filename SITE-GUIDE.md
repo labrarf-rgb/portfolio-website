@@ -35,7 +35,9 @@ Just hand-written HTML files that share one stylesheet and one script.
   1. **Theme toggle.** Reads/writes `localStorage["theme"]`, sets
      `data-theme` on `<html>`. The toggle button is `#theme-toggle`.
   2. **Contact form.** Intercepts `#contact-form` submit and POSTs to Formspree
-     (`https://formspree.io/f/mlgvpwqy`). Only present on `index.html`.
+     (`https://formspree.io/f/mlgvpwqy`). Only present on `index.html`. The
+     standalone `contact.html` has its own inline copy of this logic and does
+     not load `script.js`.
 - **Embedding apps.** Each showcased app is its own separately hosted site. The
   portfolio embeds it through a thin full-screen `iframe` wrapper page (see the
   two-page-per-project pattern below). The portfolio does not contain the apps'
@@ -67,6 +69,7 @@ The embed page is tiny and identical across projects except for `<title>`, the
 | `unifycrm.html` / `unifycrm-app.html` | Case study + embed: UnifyCRM |
 | `drifts-calculator.html` / `drifts-calculator-app.html` | Case study + embed: DRIFTS Calculator |
 | `customer-health-score.html` / `customer-health-score-app.html` | Case study + embed: Customer Health Score Dashboard |
+| `contact.html` | Standalone, self-contained contact form (served at `/contact`). Reusable in other webapps and Android WebViews. Not linked from site nav. |
 | `styles.css` | Shared styles + design tokens |
 | `script.js` | Shared theme toggle + contact form |
 | `CNAME` | Custom domain (`www.labrarf.com`) |
@@ -112,6 +115,26 @@ Order of elements inside `<main class="container">`:
    closing `p` and a second `a.btn` ("Open app") to `<slug>-app.html`.
 
 Both "Open app" buttons use the external-link SVG and `target="_blank"`.
+
+### `contact.html` (standalone contact form)
+A single self-contained page: all CSS and JS are inline, so it does **not**
+use `styles.css` or `script.js`. It exists to be copied into other webapps and
+Android WebViews, so it must stay dependency-free (Google Fonts is the only
+external asset, and it falls back to system fonts). It is **not** linked from
+the site nav; it is reached directly at `/contact` (GitHub Pages serves the
+extensionless path from `contact.html`).
+
+It reuses the same design tokens as `styles.css` and posts to the same
+Formspree endpoint (`mlgvpwqy`). Theme behavior matches the main site: it
+defaults to light and only goes dark on manual toggle, saved under the shared
+`localStorage["theme"]` key. It does **not** auto-follow the device
+`prefers-color-scheme`. Improvements over the `index.html` form: inline status
++ success state (no `alert()`), a `_gotcha` honeypot, client-side validation,
+a configurable endpoint via `?form=<id>`, and optional prefill via
+`?name=&email=&message=`.
+
+When you change the shared form or tokens, remember this page has its own copy
+and will not pick up edits to `styles.css` / `script.js` automatically.
 
 ### Embed page (`<slug>-app.html`)
 A self-contained page with inline `<style>` that makes a single `<iframe>` fill

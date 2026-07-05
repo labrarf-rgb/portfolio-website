@@ -323,3 +323,14 @@ Newest entries at the bottom.
 - Bonus: the live demo no longer depends on the estoria repo's GitHub Pages,
   so the estoria source repo can be made private without first moving to
   Vercel.
+
+### 2026-07-04 - Estoria Contact link deployed (rebuilt `estoria/`)
+
+- Estoria's File menu gained a **Contact** item (above About) that opens
+  `www.labrarf.com/contact` in a new tab; the Android app got the same item.
+  This repo only changed because the built copy under `estoria/` was refreshed
+  via `npm run sync:portfolio` in the estoria source repo — no hand edits here.
+- Deploy verified: after push, `www.labrarf.com/estoria/` served the new bundle
+  (`index-Dyg5NZ9h.js`) and the deployed JS contains the `www.labrarf.com/contact`
+  URL. The `/contact` standalone page (`contact.html`) is the link target and was
+  unchanged.

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact form.">
+    <title>Contact</title>
+    <!--
+      Standalone, reusable contact form.
+      Self-contained: no external CSS/JS, safe to drop into any webapp or
+      Android WebView. Depends only on Google Fonts (falls back to system
+      fonts offline).
+
+      Reuse in another project:
+        1. Copy this single file in.
+        2. Set the Formspree endpoint below (FORM_ENDPOINT), or override it
+           per-page with ?form=xxxxxxx in the URL.
+        3. Optionally prefill fields via query params, e.g.
+           contact.html?name=Ray&email=ray@x.com&message=Hi
+
+      Android WebView notes:
+        - Loads fine from assets (file:///android_asset/contact.html).
+        - The submit uses fetch() to Formspree, so the WebView needs internet
+          permission and (on file:// origins) JS enabled.
+        - Respects the device dark mode automatically; a manual toggle is
+          also provided and remembered per-origin.
+    -->
+    <style>
+        /* ── Design Tokens ── */
+        :root {
+            --bg:           #f7f5f0;
+            --surface:      #ffffff;
+            --text:         #1a1a18;
+            --text-muted:   #6b6b65;
+            --border:       #e2dfd8;
+            --accent-warm:  #3d5c45;
+            --success:      #3d5c45;
+            --error:        #a13d3d;
+            --max-w:        520px;
+            --font-display: 'Raleway', system-ui, sans-serif;
+            --font-body:    'Nunito', system-ui, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg:           #141412;
+            --surface:      #1c1c1a;
+            --text:         #edebe6;
+            --text-muted:   #7a7870;
+            --border:       #2e2d2a;
+            --accent-warm:  #4a7060;
+            --success:      #6f9c85;
+            --error:        #c97d7d;
+        }
+
+        /* Follow the device setting when the user hasn't chosen one. */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg:           #141412;
+                --surface:      #1c1c1a;
+                --text:         #edebe6;
+                --text-muted:   #7a7870;
+                --border:       #2e2d2a;
+                --accent-warm:  #4a7060;
+                --success:      #6f9c85;
+                --error:        #c97d7d;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { -webkit-text-size-adjust: 100%; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            z-index: 9999;
+            padding: 0.5rem 1.25rem;
+            background: var(--text);
+            color: var(--bg);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: top 0.1s ease;
+        }
+        .skip-link:focus { top: 0; }
+
+        .wrap {
+            width: 100%;
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 48px 24px 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-warm);
+        }
+
+        #theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+        }
+        #theme-toggle:hover {
+            border-color: var(--text-muted);
+            color: var(--text);
+            background-color: var(--surface);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 5vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.6rem;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 2px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 300;
+            transition: border-color 0.2s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        input:focus, textarea:focus {
+            outline: 2px solid var(--accent-warm);
+            outline-offset: 0;
+            border-color: var(--accent-warm);
+        }
+
+        textarea { resize: vertical; min-height: 140px; }
+
+        /* Honeypot: hidden from real users, catches bots. */
+        .hp {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background-color: var(--text);
+            color: var(--bg);
+            padding: 0.8rem 1.75rem;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: opacity 0.2s ease, transform 0.1s ease;
+            margin-top: 0.5rem;
+        }
+        .btn:hover:not(:disabled) { opacity: 0.75; }
+        .btn:active:not(:disabled) { transform: scale(0.98); }
+        .btn:disabled { opacity: 0.55; cursor: default; }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--accent-warm);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        .status {
+            margin-top: 1.25rem;
+            font-size: 0.9rem;
+            min-height: 1.3em;
+        }
+        .status[data-state="success"] { color: var(--success); }
+        .status[data-state="error"]   { color: var(--error); }
+        .status[data-state="sending"] { color: var(--text-muted); }
+
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid currentColor;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .spinner { animation: none; }
+        }
+
+        /* Success confirmation replaces the form. */
+        .done {
+            display: none;
+            padding: 2.5rem 0;
+        }
+        .done h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+        }
+        .done p { color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; }
+        .link-btn {
+            background: none;
+            border: none;
+            color: var(--accent-warm);
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0;
+        }
+        .link-btn:hover { opacity: 0.75; }
+    </style>
+</head>
+<body>
+    <a href="#contact-form" class="skip-link">Skip to form</a>
+
+    <div class="wrap">
+        <div class="topbar">
+            <span class="section-label">Contact</span>
+            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+
+        <main id="main">
+            <h1>Get in touch</h1>
+            <p class="intro">Send a message and I'll get back to you.</p>
+
+            <form id="contact-form" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" inputmode="email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <!-- Honeypot: leave empty. Bots fill it; we drop those. -->
+                <div class="hp" aria-hidden="true">
+                    <label for="company">Company (leave blank)</label>
+                    <input type="text" id="company" name="_gotcha" tabindex="-1" autocomplete="off">
+                </div>
+
+                <button type="submit" class="btn" id="submit-btn">Send Message</button>
+                <p class="status" id="status" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="done" id="done">
+                <h2>Message sent</h2>
+                <p>Thanks for reaching out. I'll get back to you soon.</p>
+                <button type="button" class="link-btn" id="send-another">Send another</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // ── Config ─────────────────────────────────────────────────────
+            // Default Formspree endpoint. Override per-page with ?form=xxxxxxx
+            // (just the form id from your Formspree URL).
+            var FORM_ENDPOINT = 'https://formspree.io/f/mlgvpwqy';
+
+            var params = new URLSearchParams(location.search);
+            var formId = params.get('form');
+            if (formId && /^[a-zA-Z0-9]+$/.test(formId)) {
+                FORM_ENDPOINT = 'https://formspree.io/f/' + formId;
+            }
+
+            // ── Theme ──────────────────────────────────────────────────────
+            var root = document.documentElement;
+            var toggle = document.getElementById('theme-toggle');
+            var moon = document.getElementById('moon-icon');
+            var sun = document.getElementById('sun-icon');
+            var saved = null;
+            try { saved = localStorage.getItem('theme'); } catch (e) {}
+
+            function isDark() {
+                var attr = root.getAttribute('data-theme');
+                if (attr) return attr === 'dark';
+                return window.matchMedia &&
+                       window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+            function syncIcons() {
+                var dark = isDark();
+                moon.style.display = dark ? 'none' : 'block';
+                sun.style.display = dark ? 'block' : 'none';
+                toggle.setAttribute('aria-label', dark ? 'Toggle light mode' : 'Toggle dark mode');
+            }
+            if (saved === 'dark' || saved === 'light') {
+                root.setAttribute('data-theme', saved);
+            }
+            syncIcons();
+
+            toggle.addEventListener('click', function () {
+                var next = isDark() ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                syncIcons();
+            });
+
+            // ── Optional prefill from query params ─────────────────────────
+            ['name', 'email', 'message'].forEach(function (key) {
+                var val = params.get(key);
+                if (val) {
+                    var el = document.getElementById(key);
+                    if (el) el.value = val;
+                }
+            });
+
+            // ── Submit ─────────────────────────────────────────────────────
+            var form = document.getElementById('contact-form');
+            var btn = document.getElementById('submit-btn');
+            var status = document.getElementById('status');
+            var done = document.getElementById('done');
+
+            function setStatus(state, text) {
+                status.setAttribute('data-state', state);
+                if (state === 'sending') {
+                    status.innerHTML = '<span class="spinner"></span> ' + text;
+                } else {
+                    status.textContent = text;
+                }
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Drop bot submissions silently.
+                if (form.elements['_gotcha'] && form.elements['_gotcha'].value) return;
+
+                if (!form.checkValidity()) {
+                    setStatus('error', 'Please fill in all fields with a valid email.');
+                    form.reportValidity();
+                    return;
+                }
+
+                btn.disabled = true;
+                setStatus('sending', 'Sending...');
+
+                fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                }).then(function (res) {
+                    if (res.ok) {
+                        form.reset();
+                        form.style.display = 'none';
+                        done.style.display = 'block';
+                    } else {
+                        return res.json().then(function (data) {
+                            var msg = (data && data.errors && data.errors.length)
+                                ? data.errors.map(function (x) { return x.message; }).join(', ')
+                                : 'Something went wrong. Please try again.';
+                            setStatus('error', msg);
+                        }).catch(function () {
+                            setStatus('error', 'Something went wrong. Please try again.');
+                        });
+                    }
+                }).catch(function () {
+                    setStatus('error', 'Network error. Please check your connection and try again.');
+                }).finally(function () {
+                    btn.disabled = false;
+                });
+            });
+
+            document.getElementById('send-another').addEventListener('click', function () {
+                done.style.display = 'none';
+                form.style.display = 'block';
+                setStatus('', '');
+                document.getElementById('name').focus();
+            });
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet">
+</body>
+</html>

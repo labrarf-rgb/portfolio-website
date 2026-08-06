@@ -81,25 +81,32 @@
 
             <p>The harder problem was time away. Step back from a story for a few weeks and you lose the thread: what a character knew at a given point, why you made a particular choice, the idea you meant to circle back to and never wrote down. I wanted a single place that held all of it for me, the people, the places, the timeline, and the reasoning behind the plot, so coming back to a story felt like returning to a desk I had left organized rather than starting over. I built Estoria for myself first, and if it helps other writers keep their stories straight, even better.</p>
 
-            <p>Estoria is a visual story-mapping tool for writers, novelists, screenwriters, storytellers, and everyone in between. You arrange chapters as cards on an infinite canvas, map the scenes inside each chapter, keep characters and worldbuilding close at hand, and bring an existing manuscript in with a little help from AI. It is meant to feel like a calm, papery desk tool rather than a busy piece of software, so the story stays in front of you and the interface gets out of the way.</p>
+            <p>Estoria is where a novelist maps a story and writes it. You arrange chapters as cards on an infinite canvas, map the scenes inside each chapter, keep characters and worldbuilding close at hand, write the prose itself inside the chapter you planned, and bring an existing manuscript in with a little help from AI. It is meant to feel like a calm, papery desk tool rather than a busy piece of software, so the story stays in front of you and the interface gets out of the way.</p>
 
             <h2>Structure without the blank page</h2>
             <p>Plotting from nothing is the hardest part of starting, so Estoria leans on methods writers already trust. It ships with skeletons drawn from well-known story-structure frameworks, including the Hero's Journey, Save the Cat, Dan Harmon's Story Circle, and Kishotenketsu, among others. Pick one and the chapters and beats are laid out for you to adapt, so you start from a proven shape and shape it to your story instead of facing an empty canvas.</p>
             <p>From there the canvas keeps the logic of the story visible. Inside a chapter you lay out its scenes and connect them by how each one leads into the next, so the cause and effect of the plot stays in view as the story grows instead of getting buried in prose.</p>
 
+            <h2>Writing inside the map</h2>
+            <p>Planning a story in one app and writing it in another meant the plan went stale the moment I started drafting. Estoria now holds both. Every chapter has two faces: the story map, where its scenes and cast live, and the manuscript, where the prose goes. One button swaps between them without closing the chapter, so drafting and re-planning are a single click apart.</p>
+            <p>While you write, the chapter's beats sit in a rail down the left as a guide. They do not divide the page. Adding, deleting, or reordering a beat changes the map and leaves every word where it is, because seeing your beats while you draft never required them to own the paragraphs. Clicking a beat takes you to that scene on the map, which stays the one place scenes are edited.</p>
+
             <h2>What it does</h2>
             <ul>
                 <li><strong>Infinite story board.</strong> Chapters are cards you pan, zoom, drag, and auto-arrange. Switch between a free-form map and a timeline view with act bands, so you can work on shape or on sequence depending on what you need.</li>
                 <li><strong>Scene-level mapping.</strong> Open any chapter into its own canvas and lay out its beats, connecting each scene to the next so the flow of the story stays clear instead of living in your head.</li>
-                <li><strong>Characters and worldbuilding.</strong> Keep rich reference records for the people and places in your story, and link each one into the chapters where it actually appears, so the cast and the world are never more than a click away.</li>
+                <li><strong>Characters and worldbuilding.</strong> Keep rich reference records for the people and places in your story, and link each one into the chapters where it appears, so the cast and the world are never more than a click away.</li>
                 <li><strong>Timelines and series planning.</strong> Lay a book out in reading order on the timeline, or zoom out above a single book to plan a whole multi-book series, with its own map, timeline, and connections between books.</li>
-                <li><strong>Draft versions.</strong> Each book carries named versions, so a chapter can hold an alternate title or summary for a different draft without ever losing the base text.</li>
+                <li><strong>Write the manuscript in place.</strong> Each chapter opens into a writing pane with its beats in a rail beside it. Word counts come from what you have actually written and show against a target on the board, so progress stays visible without leaving the map.</li>
+                <li><strong>Read the whole book.</strong> The timeline switches from scenes to prose, so you can read straight through in reading order and print a typeset copy from the browser.</li>
+                <li><strong>Export for people.</strong> The manuscript exports as a standard-format .docx, the shape agents and beta readers expect, with a title page, double spacing, and a running header. Plain .md and .txt are there too, and the map still exports as Obsidian-ready markdown.</li>
+                <li><strong>Draft versions.</strong> Each book carries named versions, and a version forks the whole board, prose included. Forking asks whether to bring the writing along, and a chapter can pull its text back from another version when you want it.</li>
                 <li><strong>Structure templates.</strong> Start from skeletons drawn from well-known story-structure methods, or from a single blank chapter when you would rather build it yourself.</li>
                 <li><strong>Bring in an existing draft.</strong> Already have a manuscript in Word, Google Docs, or scattered notes? Copy Estoria's prompt into ChatGPT, Claude, or Gemini along with your draft, and it returns a file Estoria reads straight into a new project, with chapters, scenes, characters, and the world all in place.</li>
             </ul>
 
             <h2>How it's built</h2>
-            <p>Estoria is local-first by design. Everything autosaves to your browser as you work, and you can save a project to a file at any time. There is no account and no backend to sign up for, which keeps the tool fast and keeps your manuscript yours. The whole thing is built so a cloud sync layer could be added later without changing how the planning works today.</p>
+            <p>Estoria is local-first by design. Everything autosaves to your browser as you work, and you can save a project to a file at any time. There is no account and no backend to sign up for, which keeps the tool fast and keeps your manuscript yours. Chapter prose is stored separately from the rest of the project, so a book can grow to novel length without slowing the board down. The whole thing is built so a cloud sync layer could be added later without changing how the planning works today.</p>
             <p>Built with Vite, React, TypeScript, Zustand, and Tailwind.</p>
         </section>
 
@@ -107,7 +114,7 @@
         <section class="embed-section">
             <span class="section-label">Live Demo</span>
             <h2>Try it yourself</h2>
-            <p>The prototype is live and interactive. Drop chapters on the board, open one to map its scenes, browse the structure templates, or load the sample novel to see a full story already mapped out.</p>
+            <p>The prototype is live and interactive. Drop chapters on the board, open one to map its scenes or write in it, browse the structure templates, or load the sample novel to see a full story already mapped out.</p>
             <a href="estoria-app.html" target="_blank" class="btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>

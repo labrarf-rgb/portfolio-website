@@ -31,6 +31,12 @@ Just hand-written HTML files that share one stylesheet and one script.
 - **`styles.css`** - all styling for every page. Design tokens are CSS variables
   on `:root` (light) and `[data-theme="dark"]` (dark). Fonts are Google Fonts
   `Raleway` (display) and `Nunito` (body), imported at the top of the file.
+  Each token carries its source `oklch()` value as a comment. Dark is its own
+  lightness ladder at hue 75, not an inversion of light: the page floor sits at
+  L 0.22 and each surface above it steps up (`--surface` 0.26, `--card-hover`
+  0.30). Keep that ordering if you add a surface. Light has almost no headroom
+  above `--surface`, so hover elevation there comes from `--shadow-lift`, a
+  warm-tinted shadow, rather than from a lighter background.
 - **`script.js`** - two behaviors, loaded at the bottom of every page:
   1. **Theme toggle.** Reads/writes `localStorage["theme"]`, sets
      `data-theme` on `<html>`. The toggle button is `#theme-toggle`.
@@ -329,8 +335,60 @@ Newest entries at the bottom.
 - Estoria's File menu gained a **Contact** item (above About) that opens
   `www.labrarf.com/contact` in a new tab; the Android app got the same item.
   This repo only changed because the built copy under `estoria/` was refreshed
-  via `npm run sync:portfolio` in the estoria source repo — no hand edits here.
+  via `npm run sync:portfolio` in the estoria source repo, no hand edits here.
 - Deploy verified: after push, `www.labrarf.com/estoria/` served the new bundle
   (`index-Dyg5NZ9h.js`) and the deployed JS contains the `www.labrarf.com/contact`
   URL. The `/contact` standalone page (`contact.html`) is the link target and was
   unchanged.
+
+### 2026-08-05 - Warm palette retune, card hover fix, Estoria manuscript, copy pass
+
+- **Palette retuned, both themes.** Light moved off pure white (`--surface` was
+  `#ffffff`) and off the cool-leaning grays. Dark was rebuilt as its own OKLCH
+  lightness ladder at hue 75: the old floor `#141412` sat near L 0.17 and read
+  as harsh near-black, so it is now `#1e1a14` at L 0.22 with `--surface` a step
+  above it. Every token now carries its `oklch()` source as a comment. Side
+  effect worth knowing: dark `--text-muted` was `#7a7870` on `#141412`, about
+  3.4:1, so it had been failing WCAG AA. It is 6.75:1 now. Every foreground and
+  background pair on the site clears 4.5:1 in both themes; the tightest is
+  muted text on background in light at 4.69:1.
+- **`contact.html` tokens updated to match.** It keeps its own inline copy of
+  the palette (see section 5), including `--success` and `--error`, which have
+  no equivalent in `styles.css`. It does not inherit palette edits, so it was
+  edited by hand alongside `styles.css`.
+- **Card hover was inverted.** `.card` sat at `--surface` and hover swapped it
+  to `--bg`, which is darker in both themes, so hovering pushed the card back
+  instead of lifting it. Hover now goes to `--card-hover` plus `--shadow-lift`.
+  Three supporting changes that should not be undone: `overflow: hidden` came
+  off `.grid` (it was clipping the shadow at the card edge, and the 2px radius
+  it also clipped is imperceptible), the card gained `position: relative` and
+  `z-index: 1` on hover so the shadow paints over its neighbour rather than
+  under it, and the two duplicate hover rules (`.card:hover` and
+  `.card-link:hover .card`, defined 90 lines apart and doing the same thing)
+  were merged into one that also fires on `:focus-visible`.
+- **Estoria can now write the manuscript in the app.** Source of truth is
+  `~/WebAppProjects/Estoria-wa/docs/SPECS.md` (§1 and the manuscript rows in
+  §4). Every chapter has two faces, the story map and the manuscript, with the
+  chapter's beats in a left rail as a guide that deliberately does not divide
+  the prose. Added a "Writing inside the map" section plus three bullets
+  (write in place, read the whole book through the timeline, prose export) to
+  `estoria.html`, and updated the blurb on `index.html` and `projects.html`.
+- **Two Estoria claims corrected while in there.** The Draft versions bullet
+  said a version holds "an alternate title or summary"; a version actually
+  forks the whole board, prose included. And Obsidian-ready markdown export is
+  now real, reversing the 2026-06-28 entry above that removed the claim for
+  being unshipped.
+- **Copy pass against the be-more-human rules.** Cut five false-contrast
+  constructions ("isn't X, it's Y", "not just", "It's not a questionnaire"),
+  halved the count of filler "actually" from eight to four, dropped
+  "The core insight:" and "But if you stop and think about it" from DRIFTS,
+  and replaced two "Features a ..." card openers on `projects.html`. Kept two
+  X-not-Y constructions on purpose: "gut feel as a hypothesis, not a
+  conclusion" defines a stance in one line, and DRIFTS' "measures time lost
+  ..., not payroll" is a correctness note about what the model counts.
+- **Convention note.** The bolded lead-ins on feature lists (section 6) look
+  like the inline bold that be-more-human bans. They are list labels, not
+  mid-sentence emphasis, so they stay. If that ever changes it is a design
+  system decision, not a copy edit.
+- Fixed an em dash in this file's own 2026-07-04 entry. The house rule at the
+  top applies to this file too.

@@ -2,27 +2,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Nunito:wght@300;400;500&display=swap');
 
 /* ── Design Tokens ── */
+/* Warm paper palette. Light is the default; dark is its own OKLCH lightness
+   ladder (hue ~75, low chroma), not an inversion. No pure white or black. */
 :root {
-    --bg:           #f7f5f0;
-    --surface:      #ffffff;
-    --text:         #1a1a18;
-    --text-muted:   #6b6b65;
-    --border:       #e2dfd8;
-    --accent:       #1a1a18;
-    --accent-warm:  #3d5c45;
+    --bg:           #f7f3ec;  /* oklch(.965 .010  80) */
+    --surface:      #fefcf7;  /* oklch(.990 .006  85) */
+    --text:         #24201b;  /* oklch(.245 .010  70) */
+    --text-muted:   #726c65;  /* oklch(.535 .014  72) */
+    --border:       #dfd8cc;  /* oklch(.885 .018  80) */
+    --accent:       #24201b;
+    --accent-warm:  #43664f;  /* oklch(.475 .055 155) */
+    /* Hover elevation: one step up in lightness, plus a soft warm-tinted
+       lift. Light has almost no headroom above --surface, so the shadow
+       does most of the work there; dark gets a real +L step. */
+    --card-hover:   #fffefb;  /* oklch(.996 .004  85) */
+    --shadow-lift:  0 1px 2px rgba(70, 52, 20, 0.10), 0 6px 16px rgba(70, 52, 20, 0.08);
     --max-w:        760px;
     --font-display: 'Raleway', system-ui, sans-serif;
     --font-body:    'Nunito', system-ui, sans-serif;
 }
 
 [data-theme="dark"] {
-    --bg:           #141412;
-    --surface:      #1c1c1a;
-    --text:         #edebe6;
-    --text-muted:   #7a7870;
-    --border:       #2e2d2a;
-    --accent:       #edebe6;
-    --accent-warm:  #4a7060;
+    --bg:           #1e1a14;  /* oklch(.220 .012  75) floor */
+    --surface:      #28231d;  /* oklch(.260 .013  75) one step up */
+    --text:         #e2ddd7;  /* oklch(.900 .010  75) */
+    --text-muted:   #a6a19a;  /* oklch(.710 .011  75) */
+    --border:       #3c3731;  /* oklch(.340 .012  75) */
+    --accent:       #e2ddd7;
+    --accent-warm:  #75a682;  /* oklch(.680 .075 152) */
+    --card-hover:   #322d27;  /* oklch(.300 .013  75) one step above surface */
+    --shadow-lift:  0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 26px rgba(0, 0, 0, 0.40);
 }
 
 /* ── Reset ── */
@@ -263,18 +272,14 @@ li::before {
     background-color: var(--border);
     border: 1px solid var(--border);
     border-radius: 2px;
-    overflow: hidden;
     margin-top: 2rem;
 }
 
 .card {
     background-color: var(--surface);
     padding: 2rem;
-    transition: background-color 0.2s ease;
-}
-
-.card:hover {
-    background-color: var(--bg);
+    position: relative;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card p {
@@ -359,8 +364,14 @@ li::before {
     opacity: 0.75;
 }
 
-.card-link:hover .card {
-    background-color: var(--bg);
+/* Hover lifts the card toward the viewer rather than sinking it: a step up
+   in lightness plus a soft warm shadow. z-index keeps the shadow above the
+   neighbouring card's background instead of being covered by it. */
+.card-link:hover .card,
+.card-link:focus-visible .card {
+    background-color: var(--card-hover);
+    box-shadow: var(--shadow-lift);
+    z-index: 1;
 }
 
 /* ── Project Detail Page ── */

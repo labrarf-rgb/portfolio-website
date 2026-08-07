@@ -411,3 +411,25 @@ Newest entries at the bottom.
   system decision, not a copy edit.
 - Fixed an em dash in this file's own 2026-07-04 entry. The house rule at the
   top applies to this file too.
+
+### 2026-08-06 - Estoria links direct; the iframe wrapper made it uninstallable
+
+- **`estoria.html`'s two demo buttons now point at `/estoria/`,** not
+  `estoria-app.html`. Estoria shipped a web app manifest and a service worker
+  today, so Chrome can give it its own window, its own icon and offline
+  loading. None of that was reachable through the wrapper:
+  `beforeinstallprompt` only fires for the top-level page, and the browser's
+  own install menu would have targeted `estoria-app.html`, which carries no
+  manifest, handing the user a plain shortcut instead of the app. Symptom Ray
+  hit: the Install button appeared on localhost but the live site showed manual
+  instructions.
+- **The wrapper was buying nothing.** Same origin, the thing that makes the
+  File System Access folder picker work in Estoria's Back up, comes from
+  serving `/estoria/` out of this repo (see section 5, "Cross-origin embeds").
+  The iframe only supplied a URL on this site.
+- **`estoria-app.html` is left in place** for any bookmark or old link, and
+  Estoria detects being framed and offers to reopen itself in a tab. It is no
+  longer linked from anywhere.
+- **New rule, recorded in section 5:** any future project that ships a manifest
+  must be linked directly rather than wrapped. This is the first project where
+  the two-page pattern actively broke a feature.

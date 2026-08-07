@@ -5,15 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Estoria | Map and Write Your Story" />
     <title>Estoria | Map and Write Your Story</title>
+    <!--
+      Installability. Vite rewrites these root-absolute paths with the build's
+      base, so they resolve at "/" in dev and "/estoria/" in production. The
+      manifest's own URLs are relative for the same reason — they resolve
+      against wherever the manifest itself is served from.
+    -->
+    <link rel="icon" href="/estoria/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/estoria/icon-192.png" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/estoria/apple-touch-icon.png" />
+    <link rel="manifest" href="/estoria/manifest.webmanifest" />
+    <meta name="theme-color" content="#e9e0cd" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#231f19" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-title" content="Estoria" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/estoria/assets/index-Cg0y0U_Z.js"></script>
-    <link rel="stylesheet" crossorigin href="/estoria/assets/index-BETYwgec.css">
-      <script>window.__ESTORIA_BUILD__={"version":"3.0.0","build":"139","commit":"00fb7f9","builtAt":"2026-08-07T02:11:27.707Z"}</script>
+    <script type="module" crossorigin src="/estoria/assets/index-CCbjVv3M.js"></script>
+    <link rel="stylesheet" crossorigin href="/estoria/assets/index-CzJ1SrsW.css">
+      <script>window.__ESTORIA_BUILD__={"version":"3.0.0","build":"148","commit":"95da87d","builtAt":"2026-08-07T03:12:56.203Z"}</script>
   </head>
   <body>
     <div id="root"></div>

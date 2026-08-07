@@ -71,7 +71,7 @@ The embed page is tiny and identical across projects except for `<title>`, the
 | `index.html` | Home page: About, Featured Projects (2-up grid), Contact form |
 | `projects.html` | All Projects: a vertical list of every project, newest first |
 | `estoria.html` | Case study: Estoria |
-| `estoria-app.html` | Embed: Estoria |
+| `estoria-app.html` | Embed: Estoria. **No longer linked** (see 5. "Estoria is not embedded") |
 | `unifycrm.html` / `unifycrm-app.html` | Case study + embed: UnifyCRM |
 | `drifts-calculator.html` / `drifts-calculator-app.html` | Case study + embed: DRIFTS Calculator |
 | `customer-health-score.html` / `customer-health-score-app.html` | Case study + embed: Customer Health Score Dashboard |
@@ -159,16 +159,35 @@ pickers, used by Estoria's Back up button) has no `allow` token; Chromium
 simply blocks it in cross-origin frames. Nothing on the embed page can enable
 it. Two ways around it, both in use or documented here:
 
-1. **Serve the app same-origin** (what Estoria does now). The built app is
+1. **Serve the app same-origin** (what Estoria does). The built app is
    copied into this repo under `estoria/` and served at
-   `www.labrarf.com/estoria/`; `estoria-app.html` iframes `/estoria/` instead
-   of the github.io site. Same origin means every picker works in the embed.
-   The copy is build output only (do not hand-edit it); refresh it by running
-   `npm run sync:portfolio` in the estoria source repo, then commit and push
-   this repo.
+   `www.labrarf.com/estoria/`, rather than from the github.io site. Same origin
+   means every picker works. The copy is build output only (do not hand-edit
+   it); refresh it by running `npm run deploy` in the estoria source repo,
+   which syncs, commits and pushes this repo and then verifies the deploy is
+   live.
 2. **In-app fallback.** The app detects a cross-origin frame and degrades
    (Estoria falls back to a plain file download). Estoria keeps this code as a
    safety net for any other embedder.
+
+### Estoria is not embedded (2026-08-06)
+
+`estoria.html` links straight to `/estoria/`. It is the one project page that
+does not send you to an `*-app.html` iframe wrapper.
+
+Estoria is an installable web app: with a manifest and a service worker, Chrome
+gives it its own window and icon and runs it offline. But a browser only ever
+offers to install the **top-level** page. `beforeinstallprompt` does not fire
+inside an iframe, and the browser's own install menu would target the wrapper,
+which carries no manifest of its own. Wrapped, the feature is unreachable.
+
+The wrapper existed only to give the app a URL on this site. Same origin (what
+makes the folder picker work) comes from serving `/estoria/` out of this repo,
+not from the iframe, so the wrapper bought nothing and cost the install.
+
+`estoria-app.html` stays in place for any old link, and Estoria detects being
+framed and offers to reopen itself in a tab. **Any future project that ships a
+manifest needs the same treatment:** link it directly, do not wrap it.
 
 ## 6. Formatting and voice conventions (how Ray likes it)
 

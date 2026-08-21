@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pace | Ray Labra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none;">Ray Labra</a>
+            <div class="header-actions">
+                <a href="projects.html" class="social-link" aria-label="Projects" title="Projects">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/labrarf/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Project Header -->
+        <section class="section">
+            <a href="index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to portfolio
+            </a>
+
+            <span class="section-label">Featured Project</span>
+            <h1>Pace</h1>
+
+            <div class="project-meta">
+                <span class="project-tag">Prototype</span>
+                <span class="project-tag">Planning Tool</span>
+                <span class="project-tag">Web App</span>
+                <span class="project-tag">React</span>
+            </div>
+
+            <a href="/pace-calculator/" target="_blank" class="btn btn-top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+
+            <p>I am writing a novel: fifteen chapters, five thousand words each. I know I write about a thousand words when I sit down. What I could not tell you was when I would finish, and the arithmetic that looked like it should answer that turned out to be the wrong arithmetic.</p>
+
+            <p>Seventy-five thousand words at a thousand a sitting is seventy-five sittings. That number is easy. The number that decides everything is how often I actually sit down, and that is the one I had no honest answer for. At seven sittings a week I finish in about two months. At one a week I finish in about a year and a half. Both are fair descriptions of "a thousand words a sitting, not every day", and fifteen months sit between them.</p>
+
+            <p>So I built Pace. You give it a target, it measures the rate you actually work at, and it shows you the date that rate implies. Then it prices every change you could make, in days.</p>
+
+            <h2>Two dates, not one</h2>
+            <p>Every pace calculator I could find lets you enter your good-day number and hands back a date built on it. That is a pleasant lie. If you write a thousand words on the three days a month you write, your real pace is closer to a hundred a day, and the date you were given is fiction.</p>
+            <p>Pace shows two dates side by side: the one your stated goal implies, and the one your log implies. The distance between them is the largest number on the page, because that gap is the whole point. Your measured pace divides sessions by <em>elapsed</em> weeks, not by the weeks you happened to work, so the days you did nothing are in the arithmetic where they belong.</p>
+
+            <h2>The number nobody can estimate about themselves</h2>
+            <p>Ask anyone how often they write and they will round up. Not dishonestly, they just do not know. So Pace does not ask. It keeps a calendar of every day since you started tracking, and derives your frequency from what is actually there.</p>
+            <p>The calendar is the honest part of the interface. Mine shows a dense first fortnight and then a long thin stretch of blanks, and that shape explains the finish date better than any sentence could. Logging is one number a day, because every extra field is a reason to stop.</p>
+
+            <h2>What each choice costs</h2>
+            <p>Knowing the date is useful once. What keeps me coming back is the ledger underneath it, which takes the same projection and runs it again with one thing changed, so every row is directly comparable. Skip the next week and the book arrives seven days later. Add one more sitting a week and it arrives four months sooner.</p>
+            <p>The row I did not expect: writing half as much per session but showing up daily beat my actual burst pattern by nearly six months. Every piece of writing advice says produce more per session. My own numbers said the opposite, that frequency is the lever and volume is not. A tool that runs on your real log can tell you that. A blog post cannot.</p>
+            <p>Pricing decisions this way also changes how the bad news lands. A date on its own is a verdict, and a demoralizing one is easy to close the tab on. A list of prices is something you can act on, so the honest number stops being a judgement and starts being useful.</p>
+
+            <h2>Starting when you are already halfway</h2>
+            <p>I found this problem in my own first hour of use. I did not start tracking on day one of the novel, I started forty thousand words in, and neither option available to me was any good. Backdate the start and it says I have done nothing. Log the back catalogue as a single session and my average sitting becomes forty thousand words, which produces a date that is pure fantasy.</p>
+            <p>So a project carries a head start: work finished before tracking began. It counts toward the target and is deliberately kept out of every pace figure. Progress and pace are two different numbers, and separating them is what lets you pick this up partway through and still get an honest answer. It also means the tool is useful on the first day, before anything is logged, because it projects from where you actually are rather than from zero.</p>
+
+            <h2>What it does</h2>
+            <ul>
+                <li><strong>Two dates and the gap.</strong> The date your goal implies, the date your log implies, and the distance between them as the headline figure.</li>
+                <li><strong>Pace measured, not declared.</strong> Sessions per week and amount per session both come from the log, with the empty days counted against you.</li>
+                <li><strong>A cost ledger.</strong> Each row is the same projection with one input changed, priced in days: skip a week, add a session, halve each session but show up daily, or trim the target.</li>
+                <li><strong>A what-if slider.</strong> Drag your sessions per week and watch the finish date move in real time.</li>
+                <li><strong>A continuous habit calendar.</strong> Every day since you started tracking, shaded against your goal for one session, with your show-up rate, current streak, best streak, and longest gap.</li>
+                <li><strong>A burn-up chart.</strong> What you have recorded, then a fan of projections from today: your measured pace, your goal pace, and wherever the slider sits.</li>
+                <li><strong>A head start.</strong> Record what was done before you started tracking without corrupting the projection.</li>
+                <li><strong>Deadlines.</strong> Set one and Pace tells you how far past it your real pace lands, or how much room you have.</li>
+                <li><strong>Any unit.</strong> Nothing below the labels knows what a word is. Words, miles, pages, reps, or hours all work the same way.</li>
+                <li><strong>Backup to a file.</strong> Save every project and its log, and load one back. Loading appends rather than replaces, so an import cannot overwrite work you already have.</li>
+            </ul>
+
+            <h2>How it's built</h2>
+            <p>Everything lives in your browser. There is no account, no backend, and nothing is uploaded, so a backup file is the only copy that survives clearing site data.</p>
+            <p>The projection maths sits in one file with no framework in it and is covered by fifty tests, because a projection that is subtly wrong is worse than no projection at all. The tests pin the things that would be easy to get quietly wrong: that a head start never leaks into the average session, that skipping a week costs exactly seven days, and that the empty days stay in the denominator.</p>
+            <p>Built with Vite, React, and TypeScript. The source is <a href="https://github.com/labrarf-rgb/pace-calculator" target="_blank" rel="noopener noreferrer">on GitHub</a>.</p>
+        </section>
+
+        <!-- CTA -->
+        <section class="embed-section">
+            <span class="section-label">Live Demo</span>
+            <h2>Try it yourself</h2>
+            <p>It starts with a novel-shaped project, so change the target to whatever you are working on, set what you have already done, and log a day. Every date on the page moves as soon as you do.</p>
+            <a href="/pace-calculator/" target="_blank" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

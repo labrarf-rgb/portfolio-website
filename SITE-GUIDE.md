@@ -286,7 +286,7 @@ does not show, hard refresh (Cmd+Shift+R) or wait for the CDN to flush.
 | `unifycrm` | UnifyCRM | https://unifycrm.vercel.app/ | Yes |
 | `drifts-calculator` | DRIFTS Calculator | https://labrarf-rgb.github.io/drifts-calculator/ | No |
 | `customer-health-score` | Customer Health Score Dashboard | https://labrarf-rgb.github.io/customer-health-score/ | No |
-| `pace-calculator` | Pace | https://www.labrarf.com/pace-calculator/ (same-origin copy; source also live at https://labrarf-rgb.github.io/pace-calculator/) | No |
+| `pace-calculator` | Pace | https://www.labrarf.com/pace-calculator/ (same-origin copy, the only live URL; GitHub Pages is not enabled on the source repo) | No |
 
 All five appear on `projects.html`. Featured on the home page is currently
 Estoria and UnifyCRM only.
@@ -478,8 +478,11 @@ Newest entries at the bottom.
   `/pace-calculator/version.json` until prod reports that SHA. Modelled on
   Estoria's `scripts/deploy.sh`. Do not hand-edit `pace-calculator/`.
 - **Base path note.** The repo, the folder here, and the Vite `base` are all
-  `pace-calculator`, so one build works at both `www.labrarf.com/pace-calculator/`
-  and `labrarf-rgb.github.io/pace-calculator/`.
+  `pace-calculator`, so the one build is portable: it works at
+  `www.labrarf.com/pace-calculator/` today, and would work unchanged at
+  `labrarf-rgb.github.io/pace-calculator/` if Pages is ever enabled on the source
+  repo. It is not enabled now, and does not need to be, because the live app is
+  served from here.
 - Verified locally against a static server before pushing: the case study, the
   projects list, `/pace-calculator/`, and `/pace-calculator/version.json` all
   resolve, and logging a day in the built app persists to `localStorage` and

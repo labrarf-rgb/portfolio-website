@@ -14,6 +14,31 @@
   --accent-hover: oklch(0.78 0.11 152);
 }
 
+/* One measure and one gutter for every element on the page, both growing with
+   the viewport. A fixed 760px column left roughly half of a 1440px screen
+   empty, so the column widens, and the type grows with it: widening a column
+   without growing the type just makes lines too long to read. Measured line
+   length across the prose blocks stays in the eighties rather than running to
+   113 characters as it did before.
+
+   Wide screens also gain from layout rather than from longer lines. Below,
+   books, runner-ups and trait bars go two across once there is room, which
+   fills the width with content instead of stretching sentences. */
+:root {
+  --measure: 760px;
+  --gutter: 24px;
+  --font: 16px;
+}
+@media (min-width: 1100px) {
+  :root { --measure: 860px; --gutter: 32px; --font: 20px; }
+}
+@media (min-width: 1500px) {
+  :root { --measure: 960px; --gutter: 40px; --font: 21px; }
+}
+@media (max-width: 480px) {
+  :root { --gutter: 18px; }
+}
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -23,7 +48,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: var(--font);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   transition: background .3s ease, color .3s ease;
@@ -68,7 +93,7 @@ a:hover { color: var(--accent-hover); }
   background: var(--bg); border-bottom: 1px solid var(--rule);
 }
 .header-inner {
-  width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px;
+  width: 100%; max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .wordmark {
@@ -76,7 +101,7 @@ a:hover { color: var(--accent-hover); }
   font-size: 1.05rem; letter-spacing: .02em;
 }
 
-main { max-width: 760px; margin: 0 auto; padding: 0 24px 96px; }
+main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px; }
 
 .screen { padding: 64px 0 0; }
 .screen[hidden] { display: none; }
@@ -106,7 +131,7 @@ main { max-width: 760px; margin: 0 auto; padding: 0 24px 96px; }
 
 /* ---- intro ---- */
 .lede h1 { font-size: clamp(2rem, 5vw, 2.9rem); margin-bottom: 1.2rem; }
-.lede p { color: var(--soft); max-width: 60ch; }
+.lede p { color: var(--soft); }
 .intro-actions { margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 .intro-meta { font-size: .85rem; color: var(--faint); }
 
@@ -151,7 +176,7 @@ main { max-width: 760px; margin: 0 auto; padding: 0 24px 96px; }
 /* ---- result ---- */
 .result-head h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin: .2rem 0 .6rem; }
 .result-tagline { color: var(--soft); font-size: 1.05rem; }
-.result-why { max-width: 62ch; }
+
 
 .subhead {
   margin: 56px 0 20px; padding-top: 28px; border-top: 1px solid var(--rule);
@@ -195,7 +220,7 @@ main { max-width: 760px; margin: 0 auto; padding: 0 24px 96px; }
 .runner-body .book { padding: 14px 16px; }
 .runner-match { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
 
-.caveat { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--rule); color: var(--faint); font-size: .9rem; max-width: 62ch; }
+.caveat { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--rule); color: var(--faint); font-size: .95rem; }
 
 .result-actions { margin-top: 32px; }
 
@@ -226,14 +251,14 @@ main { max-width: 760px; margin: 0 auto; padding: 0 24px 96px; }
 .scale-btn[aria-pressed="true"] .scale-key { border-color: var(--accent); color: var(--accent); }
 .scale-label { font-size: .98rem; }
 
-/* The statement should span the same width as the answer buttons under it.
-   An earlier max-width of 22ch wrapped it at roughly half the column while the
-   buttons ran full width, which read as a layout bug rather than as emphasis. */
+/* Everything shares one measure, set on :root. Capping individual text blocks
+   at their own ch value was what made the right edge step in and out down the
+   page: a paragraph would stop at 556px while the card under it ran to 712. */
 #item-text { max-width: none; }
 
 
 /* ---- feedback ---- */
-.feedback-note { color: var(--soft); font-size: .95rem; max-width: 62ch; }
+.feedback-note { color: var(--soft); font-size: 1rem; }
 .feedback-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
 .feedback-actions .btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 .feedback-correction { margin-top: 18px; display: grid; gap: 8px; max-width: 340px; }
@@ -252,6 +277,18 @@ main { max-width: 760px; margin: 0 auto; padding: 0 24px 96px; }
 .feedback-data .btn { font-size: .72rem; padding: 9px 16px; }
 
 .result-confidence {
-  max-width: 62ch; font-size: .92rem; color: var(--soft);
+  font-size: .98rem; color: var(--soft);
   border-left: 2px solid var(--line); padding-left: 14px; margin-top: -.2rem;
+}
+
+
+/* ---- wide screens: use the width for content, not for line length ---- */
+@media (min-width: 1100px) {
+  .books, .runners { grid-template-columns: 1fr 1fr; }
+  .traits { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  /* A runner-up opens to its own shelf, which would be cramped at half width,
+     so an open one takes the full row back. */
+  .runner[open] { grid-column: 1 / -1; }
+  .runner[open] .books { grid-template-columns: 1fr 1fr 1fr; }
+  .feedback-actions .btn { flex: none; }
 }

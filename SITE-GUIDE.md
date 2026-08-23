@@ -532,6 +532,14 @@ Newest entries at the bottom.
   the shared `styles.css` and `script.js`, the app's asset paths are relative
   so they work under the `/reader-type/` subpath, the featured grid is
   unchanged, and no em dashes in any touched file.
+- **Copy correction: do not invent Ray's personal history.** The first draft
+  opened with "I read a lot, and I am bad at picking the next book", which is
+  not true of Ray and was never his to claim. Section 6 says case studies open
+  with Ray's own reason for building the thing, and that only works when the
+  reason is known. Where it is not, the page opens with what the project is and
+  stays descriptive, which is what `reader-type.html` does now: no first person
+  anywhere on it. Never manufacture a motivation, a habit, or an anecdote to
+  satisfy the house voice.
 - **Case study rewritten same day.** The first draft was organised around how
   the thing got built (what broke, what I found, what I corrected) and read as
   a development diary rather than a case study. Rewritten around what it is,

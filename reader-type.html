@@ -77,49 +77,58 @@
                 Open app
             </a>
 
-            <p>Every book quiz I have taken asks which books I already liked, then hands back more of the same. That is a recommendation engine wearing a quiz costume, and it can only ever point at where I have already been. I wanted the other thing: something that asks about the person and works out what they might enjoy from that.</p>
+            <p>I read a lot, and I am bad at picking the next book. The recommendations I get are all built the same way: they look at what I have already read and offer me more of it. That works until you want something genuinely different, at which point being told "readers who liked this also liked" is no help at all. It can only point back at where you have already been.</p>
 
-            <p>So Reader Type asks about you. Twenty four short statements, answered on a five point agree scale, build a profile across ten dimensions. That profile is matched against sixteen genres, and you get a genre, three books ordered to suit you, and the two next closest genres with their own shelves.</p>
+            <p>Reader Type takes the other route. It asks about you, not about your bookshelf. Twenty four short statements, answered on a five point agree scale, build a profile across ten dimensions. That profile is matched against sixteen genres, and you get a genre, three books chosen to suit you, and the two next closest genres with their own shelves.</p>
 
-            <p>Most of the work went into stopping it from being wrong in ways that are easy to miss.</p>
+            <p>It takes about three minutes, there is no sign up, and nothing is uploaded.</p>
 
-            <h2>The format was the bug</h2>
-            <p>It started as twelve questions with four written options each, the shape almost every online quiz uses. Testing it killed that format. The options had to be read and re-read, several did not resonate, and some answers got picked more or less at random just to move on.</p>
-            <p>Those arbitrary picks are not neutral. They are noise going straight into the model, and no amount of clever scoring recovers from bad input. Comparing four paragraphs means holding four unrelated things in your head at once. A single statement is read once and answered.</p>
-            <p>So the quiz now shows one statement at a time and asks how much you agree, which is how personality inventories are actually built. Reading load dropped from about 1,330 words to 220, and neutral became a real answer, so "none of this is me" no longer forces a guess that the model then treats as data.</p>
+            <h2>What it measures</h2>
+            <p>Six of the ten dimensions sit close to the Big Five personality factors: openness, structure, sociability, empathy, intensity, and curiosity. Curiosity is nearer to what psychologists call need for cognition, which predicts appetite for nonfiction better than any Big Five factor does.</p>
+            <p>The other four are about reading rather than personality, and they are the ones that do the real work:</p>
+            <ul>
+                <li><strong>Ambiguity.</strong> How comfortable you are with something that is never explained. This is the difference between science fiction, which explains its strangeness, and magical realism, which refuses to.</li>
+                <li><strong>Hope.</strong> Whether you need it to come out okay in the end.</li>
+                <li><strong>Humor.</strong> Whether you want the book to be funny, whatever else it is doing.</li>
+                <li><strong>Factual.</strong> Whether you would rather read the invented version or the real one.</li>
+            </ul>
 
-            <h2>It was measuring how agreeable you are</h2>
-            <p>A quieter problem, and my favourite thing I found. Almost every statement was written so that agreeing raised a trait. That sounds harmless until you notice what it does to someone who tends to agree: they score as maximally everything.</p>
-            <p>You could see it in the extremes. Answering "strongly agree" to all twenty four statements returned Comic Novels. Answering "strongly disagree" to all of them returned Horror. Neither of those is a taste, it is a response style, and the quiz was reading it as a personality.</p>
-            <p>The fix is standard practice in real inventories and I should have built it in from the start: every trait now carries the same weight on statements where agreeing raises it as on statements where agreeing lowers it. "I recharge best on my own" sits opposite "I think best out loud, with someone else in the room". Answer everything the same way now and you get a flat profile and no result, which is the honest response to a content free set of answers.</p>
+            <h2>Why hope gets its own axis</h2>
+            <p>Hope is the filter I think readers actually apply and quizzes never ask about. It is not the same as how intense you like things, and treating the two as one thing is why recommendations so often miss.</p>
+            <p>Never Let Me Go and Project Hail Mary are both science fiction, both well liked, and both about someone trying to solve an impossible situation. They are opposite answers to the question of whether it comes out okay. Handing the wrong one to someone is a bigger miss than getting the genre wrong, because they will put it down for reasons that have nothing to do with the subject.</p>
 
-            <h2>No genre gets a head start</h2>
-            <p>Sixteen genres do not sit evenly in the space the traits describe. Some are crowded together, some sit off on their own, and a genre in a dense neighbourhood wins far less often through no fault of the reader.</p>
-            <p>Left alone, that meant the catalogue was answering rather than the person: Comic Novels and Horror came up about 1.75 times as often as chance while Literary Fiction came up 0.58 times as often. So every genre's score is now calibrated against how that same genre scores for someone answering at random. What ranks is how far above its own baseline a genre lands. Win share tightened to between 0.61 and 1.38 times uniform.</p>
+            <h2>How the matching works</h2>
+            <p>Each genre carries its own profile across the same ten dimensions. Matching compares the shape of your profile to the shape of each genre's, rather than the raw numbers, so someone who answers strongly across the board does not simply match everything.</p>
+            <p>Two adjustments keep it honest. Both sides are standardised first: you against the range of scores the quiz can actually produce, and each genre against the other fifteen, so "high curiosity" means high relative to the other genres rather than high in the abstract. Then every genre is calibrated against how it scores for someone answering at random, which stops genres that sit in crowded parts of the space from winning by default. Without that second step the catalogue does more of the answering than the person does.</p>
+            <p>The statements are also balanced in both directions. Every dimension has as much weight on statements where agreeing raises it as on statements where agreeing lowers it, so agreeing with everything produces no result rather than a result. That is standard practice in real inventories, and without it the quiz measures how agreeable you are instead of what you like.</p>
 
-            <h2>Not tuning it toward myself</h2>
-            <p>The part I am most glad I caught. I was testing with my own taste as the yardstick, and I had told it up front that I had been reading speculative fiction and magical realism. When it eventually returned exactly that, it proved nothing: I had adjusted it until it agreed with me.</p>
-            <p>That is a defeat device, not a validation. A quiz that has been shaped toward one person's answers is worse for everyone else, and the whole point is that it should be close to true for whoever is taking it.</p>
-            <p>So the corrections went the other way. Calibration is one rule applied identically to all sixteen genres, because adjusting individual genres by hand is exactly how an author's taste leaks into other people's results. The mood statements went back to normal weight after I had briefly doubled them with my own situation in mind. The two genres I had named lost their edge as a result and now sit slightly below uniform rather than above it. One genre, Narrative History, is still under-represented, and I have deliberately left it that way rather than nudge it, because nudging it is the same move dressed up as a fix.</p>
+            <h2>The books are picked for you, not for the bucket</h2>
+            <p>Getting the genre right is only half of it. Literary Fiction holds both Gilead and Never Let Me Go, and telling two very different readers the same three titles because they landed in the same bucket wastes most of what the quiz just learned about them.</p>
+            <p>So every book carries two tags of its own: how hopeful it is, and how much work it asks of you. The three books you see are ordered against your own scores on those, with hope weighted more heavily. A reader who said plainly that they need things to end well gets Gilead first. A reader drawn to sad stories gets Never Let Me Go first. Same genre, different shelf.</p>
+
+            <h2>It tells you when it is unsure</h2>
+            <p>Any quiz can name a winner. Not every set of answers supports one. If your answers sat near the middle, or the top two genres are separated by almost nothing, the result page says so and points you at all three rather than presenting a coin toss as a reading of you.</p>
+            <p>You can also tell it that it got you wrong. The result page asks, and if you disagree it asks which genre would have been right. That is recorded with your profile and what it guessed, so the genre model can eventually be fitted to real responses instead of resting on my judgement. It stays in your browser, and you can export or delete it.</p>
 
             <h2>What it does</h2>
             <ul>
-                <li><strong>Ten dimensions.</strong> Six sit close to Big Five personality factors. Curiosity is nearer need for cognition, which predicts appetite for nonfiction better. Ambiguity, hope, humor, and factual cut across genres rather than describing personality.</li>
-                <li><strong>Hope as its own axis.</strong> Whether you need it to come out okay, kept separate from how intense you like it. It is probably the strongest filter real readers apply and most quizzes never ask.</li>
-                <li><strong>Books ordered for you, not for the bucket.</strong> Every book carries its own hope and demand tags, so a reader who needs things to end well is not handed the bleakest book in the genre first.</li>
-                <li><strong>Mood, asked separately.</strong> A few statements ask what you want right now rather than in general, weighted the same as everything else. What you want this month and what you like in general disagree more often than a trait model admits.</li>
-                <li><strong>Both runner up genres open up.</strong> Each shows its own tagline and three books, because a reader sitting between two genres wants both shelves.</li>
-                <li><strong>It says when it is unsure.</strong> If your answers sat near the middle, or the top two genres are separated by almost nothing, it tells you instead of presenting a coin toss as a reading of you.</li>
-                <li><strong>A way to tell it that it is wrong.</strong> The result page asks whether the match was right and records your profile, what it guessed, and what you say is actually correct.</li>
+                <li><strong>Reads the person, not the shelf.</strong> Twenty four statements about how you handle uncertainty, whether you take on other people's moods, and what you want right now. Only a few mention books at all.</li>
+                <li><strong>Sixteen genres.</strong> Including the ones most quizzes flatten together, like speculative fiction and magical realism, or narrative history and historical fiction.</li>
+                <li><strong>Three books, ordered for you.</strong> Chosen from the matched genre by how hopeful and how demanding each one is, against your own answers.</li>
+                <li><strong>Both runners up open up.</strong> Each shows its own three books, because plenty of readers sit between two genres rather than inside one.</li>
+                <li><strong>Mood asked separately.</strong> A few statements ask what you want this month rather than in general, since the two disagree more often than a personality model admits.</li>
+                <li><strong>A profile you can read.</strong> All ten dimensions are shown with your score, so you can see what drove the result.</li>
+                <li><strong>Neutral is a real answer.</strong> If a statement does not resonate, say so, and it counts for nothing rather than forcing a guess.</li>
+                <li><strong>Light and dark, and the keyboard.</strong> Answer with the number keys, go back with backspace.</li>
             </ul>
 
             <h2>How it's built</h2>
-            <p>Plain HTML, CSS, and JavaScript. No framework, no build step, no backend. The model lives in one data file: the ten traits, the twenty four statements with their weights, and the sixteen genres with their trait vectors and books.</p>
-            <p>Scoring standardises both sides before comparing them, the reader against the spread of scores the quiz can produce and each genre against the other fifteen, then takes the correlation between those. An earlier version compared the raw vectors and squashed every match into a narrow band where two genres won a third of all results.</p>
-            <p>Nothing is uploaded. Your answers and any feedback you leave stay in your browser, and you can export or delete them.</p>
+            <p>Plain HTML, CSS, and JavaScript. No framework, no build step, no backend, no dependencies. The whole model lives in one data file: the ten dimensions, the twenty four statements with their weights, and the sixteen genres with their profiles and books. Changing what the quiz believes means editing that file and nothing else.</p>
+            <p>Everything runs in your browser. There is no account and nothing is sent anywhere, so your answers and any feedback you leave never leave your machine.</p>
 
             <h2>The honest caveat</h2>
-            <p>This is entertainment with a real model underneath, not a validated instrument. The statements borrow the style of Big Five items but are not the validated scales, and every genre profile is a hand-authored judgement call rather than something fitted to data. The feedback capture exists to change that, but until enough real responses are collected and the numbers are fitted to them, they are informed guesses. Treat the result as a decent suggestion, not a verdict.</p>
+            <p>This is entertainment with a real model underneath, not a validated instrument. The statements borrow the style of Big Five items but are not the validated scales, and every genre profile is a considered judgement call rather than something fitted to data. The feedback capture exists to change that, but until enough real responses come in, those numbers are informed guesses.</p>
+            <p>One thing I was careful about: no genre is adjusted to make particular people get particular results. Where a genre comes up too often or too rarely, the fix belongs in a rule that treats all sixteen the same, never in a nudge toward the answer someone wanted. Treat the result as a decent suggestion, not a verdict.</p>
         </section>
 
         <!-- CTA -->

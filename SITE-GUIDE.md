@@ -532,3 +532,12 @@ Newest entries at the bottom.
   the shared `styles.css` and `script.js`, the app's asset paths are relative
   so they work under the `/reader-type/` subpath, the featured grid is
   unchanged, and no em dashes in any touched file.
+- **Case study rewritten same day.** The first draft was organised around how
+  the thing got built (what broke, what I found, what I corrected) and read as
+  a development diary rather than a case study. Rewritten around what it is,
+  who it is for, and how it works: what the ten dimensions measure, why hope is
+  its own axis, how matching and calibration work, how books get ordered per
+  reader. The build history is gone except where it explains a property the
+  reader can see. Worth remembering as a convention: the case studies describe
+  the product and the reasoning behind its design, not the sequence of
+  problems hit while making it.

@@ -148,13 +148,30 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
 .btn-ghost[disabled] { opacity: .4; cursor: not-allowed; }
 
-.theme-toggle {
-  background: transparent; border: 1px solid var(--line); color: var(--soft);
-  border-radius: 2px; padding: 6px 12px; cursor: pointer;
-  font: inherit; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
-  transition: color .2s ease, border-color .2s ease;
+/* The site's own toggle: a 36px circle holding a moon in light and a sun in
+   dark. The round shape is the one place the 2px radius does not apply, which
+   matches the site and is the usual exception for a true toggle. */
+#theme-toggle {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--soft);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s ease, color .2s ease, background-color .2s ease;
 }
-.theme-toggle:hover { color: var(--ink); border-color: var(--ink); }
+#theme-toggle:hover {
+  border-color: var(--soft);
+  color: var(--ink);
+  background-color: var(--card);
+}
+#sun-icon { display: none; }
+[data-theme="dark"] #moon-icon { display: none; }
+[data-theme="dark"] #sun-icon { display: block; }
 
 /* ---- intro ---- */
 .lede h1 { font-size: clamp(2rem, 5vw, 2.9rem); margin-bottom: 1.2rem; }

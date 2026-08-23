@@ -461,7 +461,10 @@ document.addEventListener("keydown", (e) => {
 const toggle = el("theme-toggle");
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  toggle.textContent = theme === "dark" ? "Light" : "Dark";
+  /* The icons are swapped by CSS on the data-theme attribute, exactly as they
+     are on the rest of the site, so the label is all this has to maintain. */
+  toggle.setAttribute("aria-label",
+    theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
   toggle.setAttribute("aria-pressed", String(theme === "dark"));
   try { localStorage.setItem("theme", theme); } catch (_) {}
 }

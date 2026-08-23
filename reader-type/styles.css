@@ -1,17 +1,44 @@
-/* Estoria palette. Light default, dark via data-theme swap on <html>. */
+/* Tokens are the portfolio site's own, not a separate palette.
+
+   This app is served from www.labrarf.com/reader-type/, so the site's tokens
+   are ground truth for it: same warm paper background, same warm near-black
+   ink, same muted green accent, same 2px radius, same Raleway and Nunito
+   pairing. Clicking through from the case study should not feel like leaving
+   the site.
+
+   The quiz needs one surface more than the site defines, for the hover state
+   on option rows, so --panel maps to the site's --card-hover. Light has almost
+   no headroom above the card colour, which is why hovers there also carry the
+   warm shadow; dark gets a real step up in lightness instead.
+
+   Only one muted text colour exists on purpose. Anything lighter than #726c65
+   fails 4.5:1 against this background, so hierarchy below the ink comes from
+   size and weight rather than from a fainter grey. */
 :root, [data-theme="light"] {
-  --bg: #e9e0cd; --panel: #f6f0e2; --card: #fffdf6; --ink: #2b2620;
-  --soft: #574e40; --faint: #6d6352; --line: #cdbfa2; --rule: #e1d6bf;
-  --shadow: 0 1px 2px rgba(70,52,20,.1), 0 6px 16px rgba(70,52,20,.08);
-  --accent: oklch(0.48 0.1 152);
-  --accent-hover: oklch(0.42 0.1 152);
+  --bg: #f7f3ec;
+  --card: #fefcf7;
+  --panel: #fffefb;
+  --ink: #24201b;
+  --soft: #726c65;
+  --faint: #726c65;
+  --line: #dfd8cc;
+  --rule: #dfd8cc;
+  --accent: #43664f;
+  --accent-hover: #35513f;
+  --shadow: 0 1px 2px rgba(70, 52, 20, .10), 0 6px 16px rgba(70, 52, 20, .08);
 }
 [data-theme="dark"] {
-  --bg: #231f19; --panel: #2b2721; --card: #352f29; --ink: #e4ddd3;
-  --soft: #b3aca2; --faint: #9e978d; --line: #4c4740; --rule: #605a52;
-  --shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 26px rgba(0,0,0,.4);
-  --accent: oklch(0.72 0.09 152);
-  --accent-hover: oklch(0.78 0.11 152);
+  --bg: #1e1a14;
+  --card: #28231d;
+  --panel: #322d27;
+  --ink: #e2ddd7;
+  --soft: #a6a19a;
+  --faint: #a6a19a;
+  --line: #3c3731;
+  --rule: #3c3731;
+  --accent: #75a682;
+  --accent-hover: #8fbb9a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 26px rgba(0, 0, 0, .40);
 }
 
 /* One measure and one gutter for every element on the page, both growing with
@@ -47,7 +74,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Nunito', system-ui, sans-serif;
   font-size: var(--font);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +82,7 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: Spectral, ui-serif, Georgia, serif;
+  font-family: 'Raleway', system-ui, sans-serif;
   font-weight: 400;
   line-height: 1.25;
   margin: 0;
@@ -75,7 +102,7 @@ a:hover { color: var(--accent-hover); }
 .skip-link {
   position: absolute; left: -9999px;
   background: var(--card); color: var(--ink);
-  padding: 8px 16px; z-index: 10; border-radius: 4px;
+  padding: 8px 16px; z-index: 10; border-radius: 2px;
 }
 .skip-link:focus { left: 16px; top: 16px; }
 
@@ -97,7 +124,7 @@ a:hover { color: var(--accent-hover); }
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .wordmark {
-  font-family: Spectral, ui-serif, Georgia, serif;
+  font-family: 'Raleway', system-ui, sans-serif;
   font-size: 1.05rem; letter-spacing: .02em;
 }
 
@@ -111,7 +138,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 .btn {
   font: inherit; font-size: .8rem; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase;
-  padding: 12px 22px; border-radius: 4px; cursor: pointer;
+  padding: 12px 22px; border-radius: 2px; cursor: pointer;
   transition: opacity .2s ease, transform .2s ease, border-color .2s ease, color .2s ease;
 }
 .btn:active { transform: scale(.98); }
@@ -123,7 +150,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 
 .theme-toggle {
   background: transparent; border: 1px solid var(--line); color: var(--soft);
-  border-radius: 4px; padding: 6px 12px; cursor: pointer;
+  border-radius: 2px; padding: 6px 12px; cursor: pointer;
   font: inherit; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
   transition: color .2s ease, border-color .2s ease;
 }
@@ -155,7 +182,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 
 .question { font-size: clamp(1.4rem, 3.4vw, 1.9rem); margin: 36px 0 28px; }
 
-.options { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.options { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .option {
   display: block; width: 100%; text-align: left; font: inherit;
   background: var(--card); color: var(--ink);
@@ -183,9 +210,9 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 }
 .subhead h3 { font-size: 1.3rem; }
 
-.books { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.books { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .book { background: var(--card); padding: 18px 20px; }
-.book-title { font-family: Spectral, ui-serif, Georgia, serif; font-size: 1.15rem; }
+.book-title { font-family: 'Raleway', system-ui, sans-serif; font-size: 1.15rem; }
 .book-author { color: var(--soft); font-size: .9rem; }
 .book-note { margin: .5rem 0 0; color: var(--soft); font-size: .95rem; }
 .book-link { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
@@ -199,7 +226,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 .trait-fill { height: 100%; background: var(--ink); width: 0; transition: width .4s ease; }
 .trait-blurb { font-size: .9rem; color: var(--soft); }
 
-.runners { display: grid; gap: 1px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.runners { display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .runner { background: var(--card); }
 .runner-head {
   padding: 16px 20px; display: flex; justify-content: space-between; gap: 16px;
@@ -209,7 +236,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 .runner-head::-webkit-details-marker { display: none; }
 .runner-head:hover { background: var(--panel); }
 .runner[open] .runner-head { border-bottom: 1px solid var(--rule); }
-.runner-name { font-family: Spectral, ui-serif, Georgia, serif; font-size: 1.05rem; }
+.runner-name { font-family: 'Raleway', system-ui, sans-serif; font-size: 1.05rem; }
 .runner-name::after {
   content: "+"; margin-left: .6em; color: var(--faint); font-family: inherit;
 }
@@ -230,7 +257,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 }
 
 /* ---- five point agree scale ---- */
-.scale { display: grid; gap: 1px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.scale { display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
 .scale-btn {
   display: flex; align-items: center; gap: 14px; width: 100%;
   text-align: left; font: inherit;
@@ -241,7 +268,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 .scale-btn:hover, .scale-btn:focus-visible { background: var(--panel); }
 .scale-btn[aria-pressed="true"] { background: var(--panel); }
 .scale-key {
-  flex: none; width: 26px; height: 26px; border-radius: 4px;
+  flex: none; width: 26px; height: 26px; border-radius: 2px;
   border: 1px solid var(--line); color: var(--faint);
   display: grid; place-items: center;
   font-size: .78rem; font-variant-numeric: tabular-nums;
@@ -269,7 +296,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 .feedback-correction select {
   font: inherit; font-size: .95rem; color: var(--ink);
   background: var(--card); border: 1px solid var(--line);
-  border-radius: 4px; padding: 10px 12px;
+  border-radius: 2px; padding: 10px 12px;
 }
 .feedback-correction select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .feedback-status { margin-top: 14px; font-size: .9rem; color: var(--faint); min-height: 1.4em; }
@@ -284,12 +311,17 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 
 /* ---- wide screens: use the width for content, not for line length ---- */
 @media (min-width: 1100px) {
-  .books, .runners { grid-template-columns: 1fr 1fr; }
+  /* Three books, three columns. Two columns left the third book alone on a
+     second row beside an empty cell, which read as a missing card rather than
+     as a deliberate layout. The row fills exactly instead. */
+  .books { grid-template-columns: repeat(3, 1fr); }
+  /* Two runner-ups fill a two-column row exactly. */
+  .runners { grid-template-columns: 1fr 1fr; }
   .traits { grid-template-columns: 1fr 1fr; column-gap: 40px; }
-  /* A runner-up opens to its own shelf, which would be cramped at half width,
-     so an open one takes the full row back. */
+  /* An opened runner-up takes the full row so its own three books can sit
+     three across like the main shelf. */
   .runner[open] { grid-column: 1 / -1; }
-  .runner[open] .books { grid-template-columns: 1fr 1fr 1fr; }
+  .runner[open] .books { grid-template-columns: repeat(3, 1fr); }
   .feedback-actions .btn { flex: none; }
 }
 
@@ -311,7 +343,7 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
 .share-fallback {
   width: 100%; margin-top: 14px; font: inherit; font-size: .9rem;
   line-height: 1.6; color: var(--ink); background: var(--card);
-  border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px;
+  border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px;
   resize: vertical;
 }
 .share-fallback:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

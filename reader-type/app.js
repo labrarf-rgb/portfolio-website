@@ -455,15 +455,25 @@ document.addEventListener("keydown", (e) => {
 
 /* ---------- theme ---------- */
 
+/* The site stores its theme under "theme", and this app is part of that site,
+   so it reads and writes the same key. A reader who picked dark on
+   labrarf.com arrives here already in dark. */
 const toggle = el("theme-toggle");
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   toggle.textContent = theme === "dark" ? "Light" : "Dark";
   toggle.setAttribute("aria-pressed", String(theme === "dark"));
-  try { localStorage.setItem("readertype-theme", theme); } catch (_) {}
+  try { localStorage.setItem("theme", theme); } catch (_) {}
 }
 let saved = "light";
-try { saved = localStorage.getItem("readertype-theme") || "light"; } catch (_) {}
+try {
+  /* Carry over a choice made under the app's own former key, then drop it, so
+     anyone who used the standalone version keeps their theme. */
+  const legacy = localStorage.getItem("readertype-theme");
+  if (legacy && !localStorage.getItem("theme")) localStorage.setItem("theme", legacy);
+  if (legacy) localStorage.removeItem("readertype-theme");
+  saved = localStorage.getItem("theme") || "light";
+} catch (_) {}
 setTheme(saved);
 toggle.addEventListener("click", () => {
   setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");

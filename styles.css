@@ -86,6 +86,14 @@ ul + h2 {
     margin-top: 2.75rem;
 }
 
+/* A list has a top margin but no bottom one, so a paragraph following a list
+   sat flush against the last bullet with no gap at all. Matches the 2rem that
+   already sits above the list, so a list reads as spaced on both sides.
+   Affects drifts-calculator, customer-health-score and reader-type. */
+ul + p {
+    margin-top: 2rem;
+}
+
 h3 {
     font-family: var(--font-body);
     font-size: 0.9rem;

@@ -107,7 +107,8 @@ swapped by CSS based on `data-theme`. `index.html` also has a `.skip-link`.
 One `.section` with `section-label` "Work", `h1` "All Projects", an intro `p`,
 then a `.project-list` of `.project-list-item` blocks. Each item is:
 `.project-meta` (tags) + `h3` (name) + `p` (description) + `a.project-item-link`
-("View project") to the case study. Order is newest first (top).
+("View project") to the case study. Estoria is pinned first; everything
+below it is newest first (top).
 
 ### Case study (`<slug>.html`)
 Order of elements inside `<main class="container">`:

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader Type | Ray Labra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none;">Ray Labra</a>
+            <div class="header-actions">
+                <a href="projects.html" class="social-link" aria-label="Projects" title="Projects">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/labrarf/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Project Header -->
+        <section class="section">
+            <a href="index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to portfolio
+            </a>
+
+            <span class="section-label">Featured Project</span>
+            <h1>Reader Type</h1>
+
+            <div class="project-meta">
+                <span class="project-tag">Prototype</span>
+                <span class="project-tag">Books</span>
+                <span class="project-tag">Web App</span>
+                <span class="project-tag">Vanilla JS</span>
+            </div>
+
+            <a href="/reader-type/" target="_blank" class="btn btn-top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+
+            <p>Every book quiz I have taken asks which books I already liked, then hands back more of the same. That is a recommendation engine wearing a quiz costume, and it can only ever point at where I have already been. I wanted the other thing: something that asks about the person and works out what they might enjoy from that.</p>
+
+            <p>So Reader Type asks about you. Twenty four short statements, answered on a five point agree scale, build a profile across ten dimensions. That profile is matched against sixteen genres, and you get a genre, three books ordered to suit you, and the two next closest genres with their own shelves.</p>
+
+            <p>Most of the work went into stopping it from being wrong in ways that are easy to miss.</p>
+
+            <h2>The format was the bug</h2>
+            <p>It started as twelve questions with four written options each, the shape almost every online quiz uses. Testing it killed that format. The options had to be read and re-read, several did not resonate, and some answers got picked more or less at random just to move on.</p>
+            <p>Those arbitrary picks are not neutral. They are noise going straight into the model, and no amount of clever scoring recovers from bad input. Comparing four paragraphs means holding four unrelated things in your head at once. A single statement is read once and answered.</p>
+            <p>So the quiz now shows one statement at a time and asks how much you agree, which is how personality inventories are actually built. Reading load dropped from about 1,330 words to 220, and neutral became a real answer, so "none of this is me" no longer forces a guess that the model then treats as data.</p>
+
+            <h2>It was measuring how agreeable you are</h2>
+            <p>A quieter problem, and my favourite thing I found. Almost every statement was written so that agreeing raised a trait. That sounds harmless until you notice what it does to someone who tends to agree: they score as maximally everything.</p>
+            <p>You could see it in the extremes. Answering "strongly agree" to all twenty four statements returned Comic Novels. Answering "strongly disagree" to all of them returned Horror. Neither of those is a taste, it is a response style, and the quiz was reading it as a personality.</p>
+            <p>The fix is standard practice in real inventories and I should have built it in from the start: every trait now carries the same weight on statements where agreeing raises it as on statements where agreeing lowers it. "I recharge best on my own" sits opposite "I think best out loud, with someone else in the room". Answer everything the same way now and you get a flat profile and no result, which is the honest response to a content free set of answers.</p>
+
+            <h2>No genre gets a head start</h2>
+            <p>Sixteen genres do not sit evenly in the space the traits describe. Some are crowded together, some sit off on their own, and a genre in a dense neighbourhood wins far less often through no fault of the reader.</p>
+            <p>Left alone, that meant the catalogue was answering rather than the person: Comic Novels and Horror came up about 1.75 times as often as chance while Literary Fiction came up 0.58 times as often. So every genre's score is now calibrated against how that same genre scores for someone answering at random. What ranks is how far above its own baseline a genre lands. Win share tightened to between 0.61 and 1.38 times uniform.</p>
+
+            <h2>Not tuning it toward myself</h2>
+            <p>The part I am most glad I caught. I was testing with my own taste as the yardstick, and I had told it up front that I had been reading speculative fiction and magical realism. When it eventually returned exactly that, it proved nothing: I had adjusted it until it agreed with me.</p>
+            <p>That is a defeat device, not a validation. A quiz that has been shaped toward one person's answers is worse for everyone else, and the whole point is that it should be close to true for whoever is taking it.</p>
+            <p>So the corrections went the other way. Calibration is one rule applied identically to all sixteen genres, because adjusting individual genres by hand is exactly how an author's taste leaks into other people's results. The mood statements went back to normal weight after I had briefly doubled them with my own situation in mind. The two genres I had named lost their edge as a result and now sit slightly below uniform rather than above it. One genre, Narrative History, is still under-represented, and I have deliberately left it that way rather than nudge it, because nudging it is the same move dressed up as a fix.</p>
+
+            <h2>What it does</h2>
+            <ul>
+                <li><strong>Ten dimensions.</strong> Six sit close to Big Five personality factors. Curiosity is nearer need for cognition, which predicts appetite for nonfiction better. Ambiguity, hope, humor, and factual cut across genres rather than describing personality.</li>
+                <li><strong>Hope as its own axis.</strong> Whether you need it to come out okay, kept separate from how intense you like it. It is probably the strongest filter real readers apply and most quizzes never ask.</li>
+                <li><strong>Books ordered for you, not for the bucket.</strong> Every book carries its own hope and demand tags, so a reader who needs things to end well is not handed the bleakest book in the genre first.</li>
+                <li><strong>Mood, asked separately.</strong> A few statements ask what you want right now rather than in general, weighted the same as everything else. What you want this month and what you like in general disagree more often than a trait model admits.</li>
+                <li><strong>Both runner up genres open up.</strong> Each shows its own tagline and three books, because a reader sitting between two genres wants both shelves.</li>
+                <li><strong>It says when it is unsure.</strong> If your answers sat near the middle, or the top two genres are separated by almost nothing, it tells you instead of presenting a coin toss as a reading of you.</li>
+                <li><strong>A way to tell it that it is wrong.</strong> The result page asks whether the match was right and records your profile, what it guessed, and what you say is actually correct.</li>
+            </ul>
+
+            <h2>How it's built</h2>
+            <p>Plain HTML, CSS, and JavaScript. No framework, no build step, no backend. The model lives in one data file: the ten traits, the twenty four statements with their weights, and the sixteen genres with their trait vectors and books.</p>
+            <p>Scoring standardises both sides before comparing them, the reader against the spread of scores the quiz can produce and each genre against the other fifteen, then takes the correlation between those. An earlier version compared the raw vectors and squashed every match into a narrow band where two genres won a third of all results.</p>
+            <p>Nothing is uploaded. Your answers and any feedback you leave stay in your browser, and you can export or delete them.</p>
+
+            <h2>The honest caveat</h2>
+            <p>This is entertainment with a real model underneath, not a validated instrument. The statements borrow the style of Big Five items but are not the validated scales, and every genre profile is a hand-authored judgement call rather than something fitted to data. The feedback capture exists to change that, but until enough real responses are collected and the numbers are fitted to them, they are informed guesses. Treat the result as a decent suggestion, not a verdict.</p>
+        </section>
+
+        <!-- CTA -->
+        <section class="embed-section">
+            <span class="section-label">Live Demo</span>
+            <h2>Try it yourself</h2>
+            <p>Twenty four statements, about three minutes. Press 1 to 5 rather than clicking if you want to move quickly, and use Neutral freely. Some statements are deliberately worded so that agreeing means less of something, so read each one on its own terms.</p>
+            <a href="/reader-type/" target="_blank" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

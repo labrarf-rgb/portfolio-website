@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reader Type</title>
+<meta name="description" content="A short quiz that reads a few personality traits and suggests a book genre, plus some titles worth checking out.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=Spectral:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="wordmark">Reader Type</span>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Intro -->
+  <section class="screen" id="screen-intro">
+    <div class="lede">
+      <p class="eyebrow">Twenty four statements</p>
+      <h1>Find out what you actually want to read.</h1>
+      <p>Most book quizzes ask which book you liked and hand back more of the same. This one asks about you instead. You get one short statement at a time and say how much you agree, which is how personality inventories are actually built. Your answers are matched against sixteen genres, and you get three books.</p>
+      <p>It takes about three minutes. Nothing is saved and nothing leaves your browser.</p>
+      <div class="intro-actions">
+        <button type="button" class="btn btn-primary" id="start">Begin</button>
+        <span class="intro-meta">No sign-in, no email.</span>
+      </div>
+    </div>
+
+    <div class="method">
+      <p class="eyebrow">What it measures</p>
+      <dl id="trait-legend"></dl>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="screen" id="screen-quiz" hidden>
+    <div class="progress-row">
+      <p class="eyebrow" id="item-kind" style="margin:0">Generally</p>
+      <p class="eyebrow" id="progress-label" style="margin:0;color:var(--faint)">1 of 24</p>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+    <h2 class="question" id="item-text"></h2>
+    <div class="scale" id="scale"></div>
+
+    <div class="quiz-actions">
+      <button type="button" class="btn btn-ghost" id="back">Back</button>
+      <span class="hint">Press 1 to 5, or click</span>
+    </div>
+  </section>
+
+  <!-- Result -->
+  <section class="screen" id="screen-result" hidden>
+    <div class="result-head">
+      <p class="eyebrow">Your closest match</p>
+      <h2 id="result-name"></h2>
+      <p class="result-tagline" id="result-tagline"></p>
+    </div>
+    <p class="result-why" id="result-why"></p>
+    <p class="result-confidence" id="result-confidence" hidden></p>
+
+    <div class="subhead"><p class="eyebrow">Start here</p><h3>Three books worth your time</h3></div>
+    <ul class="books" id="books" role="list"></ul>
+
+    <div class="subhead"><p class="eyebrow">Also close</p><h3>Two more that fit you</h3></div>
+    <div class="runners" id="runners"></div>
+
+    <div class="subhead"><p class="eyebrow">Your profile</p><h3>What the answers said</h3></div>
+    <div class="traits" id="traits"></div>
+
+    <div class="subhead"><p class="eyebrow">Tell it what it got wrong</p><h3>Was this right?</h3></div>
+    <div class="feedback">
+      <p class="feedback-note">The genre profiles behind this quiz are hand-authored guesses, not fitted to data. Answering here records your trait scores and this result so they can be fitted to real responses later. It is saved in this browser only, and nothing is sent anywhere.</p>
+      <div class="feedback-actions" id="verdicts">
+        <button type="button" class="btn btn-ghost" data-verdict="yes">Yes, that is me</button>
+        <button type="button" class="btn btn-ghost" data-verdict="close">Close, not quite</button>
+        <button type="button" class="btn btn-ghost" data-verdict="no">No, wrong</button>
+      </div>
+      <div class="feedback-correction" id="correction" hidden>
+        <label class="feedback-label" for="actual-genre">Which would have been right?</label>
+        <select id="actual-genre"></select>
+      </div>
+      <p class="feedback-status" id="feedback-status" role="status"></p>
+      <div class="feedback-data" id="feedback-data" hidden>
+        <button type="button" class="btn btn-ghost" id="export">Export responses</button>
+        <button type="button" class="btn btn-ghost" id="clear">Delete saved responses</button>
+      </div>
+    </div>
+
+    <p class="caveat">A note on honesty: this is entertainment with a real model underneath, not a validated psychological instrument. The questions borrow the style of Big Five personality items but are not the actual scales, and the genre profiles are hand-authored judgment calls rather than anything fitted to data. Treat the result as a decent suggestion, not a verdict.</p>
+
+    <div class="result-actions">
+      <button type="button" class="btn btn-ghost" id="restart">Take it again</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

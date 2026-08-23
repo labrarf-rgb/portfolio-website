@@ -224,14 +224,19 @@ function bookList(genre, p) {
     </li>`).join("");
 }
 
-function renderResult() {
-  const raw = rawScores();
+function renderResult(rawOverride) {
+  const raw = rawOverride || rawScores();
   const p = profile(raw);
   const ranked = rankGenres(raw);
   const top = ranked[0].genre;
 
   lastResult = { raw, ranked };
   resetFeedback();
+
+  /* The address bar becomes the shareable thing, so copying the URL by hand
+     works as well as pressing the button. replaceState keeps the back button
+     pointing where the reader came from rather than at every result. */
+  try { history.replaceState(null, "", "#r=" + encodeResult(raw)); } catch (_) {}
 
   el("result-name").textContent = top.name;
   el("result-tagline").textContent = top.tagline;
@@ -286,11 +291,123 @@ function renderResult() {
   }).join("");
 }
 
+/* ---------- sharing ----------
+
+   A result is just ten small integers, so it fits in the URL rather than
+   needing anything stored. Every trait lands within -8 to +8, which shifted by
+   18 sits inside a single base36 digit, so a whole profile is ten characters
+   after a version marker. The marker is there so an old link can be rejected
+   cleanly if the trait list ever changes, rather than silently decoding into
+   the wrong person. */
+
+const SHARE_VERSION = "1";
+const SHARE_OFFSET = 18;
+
+function encodeResult(raw) {
+  return SHARE_VERSION + TRAIT_KEYS.map((k) => {
+    const v = Math.round(raw[k] || 0) + SHARE_OFFSET;
+    return Math.min(35, Math.max(0, v)).toString(36);
+  }).join("");
+}
+
+/* The furthest a trait can actually travel, used to reject a hand-edited link
+   rather than render a profile the quiz could never have produced. */
+function traitReach(key) {
+  let reach = 0;
+  ITEMS.forEach((it) => (reach += Math.abs(it.w[key] || 0) * 2));
+  return reach;
+}
+
+function decodeResult(code) {
+  if (!code || code[0] !== SHARE_VERSION) return null;
+  const body = code.slice(1);
+  if (body.length !== TRAIT_KEYS.length) return null;
+  const raw = {};
+  for (let i = 0; i < TRAIT_KEYS.length; i += 1) {
+    const key = TRAIT_KEYS[i];
+    const n = parseInt(body[i], 36);
+    if (Number.isNaN(n)) return null;
+    const value = n - SHARE_OFFSET;
+    if (Math.abs(value) > traitReach(key)) return null;
+    raw[key] = value;
+  }
+  return raw;
+}
+
+function shareUrl(raw) {
+  return location.origin + location.pathname + "#r=" + encodeResult(raw);
+}
+
+function resultAsText(raw) {
+  const p = profile(raw);
+  const ranked = rankGenres(raw);
+  const top = ranked[0].genre;
+  const lines = [];
+  lines.push("READER TYPE");
+  lines.push("");
+  lines.push("Your closest match: " + top.name);
+  lines.push(top.tagline);
+  lines.push("");
+  lines.push("START HERE");
+  orderBooks(top, p).forEach((b, i) => {
+    lines.push((i + 1) + ". " + b.title + ", " + b.author);
+    lines.push("   " + b.note);
+  });
+  lines.push("");
+  lines.push("ALSO CLOSE");
+  ranked.slice(1, 3).forEach((r) => {
+    lines.push(r.genre.name);
+    orderBooks(r.genre, p).forEach((b) => lines.push("   " + b.title + ", " + b.author));
+  });
+  lines.push("");
+  lines.push("YOUR PROFILE");
+  TRAIT_KEYS.forEach((k) => {
+    const pct = Math.round(p[k] * 100);
+    lines.push("   " + (TRAITS[k].label + "            ").slice(0, 13) +
+      String(pct).padStart(3) + "  " + "|".repeat(Math.round(pct / 5)));
+  });
+  lines.push("");
+  lines.push("Your result: " + shareUrl(raw));
+  lines.push("Take it yourself: " + location.origin + location.pathname);
+  return lines.join("\n");
+}
+
+function flash(message) {
+  const node = el("share-status");
+  node.textContent = message;
+  clearTimeout(flash.timer);
+  flash.timer = setTimeout(() => { node.textContent = ""; }, 4000);
+}
+
+/* Clipboard writes fail in more situations than they succeed in some setups:
+   no secure context when the file is opened straight off disk, no user
+   activation, or a browser that simply refuses. Telling someone to copy it
+   manually is useless on its own, so a failure puts the text on the page,
+   selected, where they can actually copy it. */
+function copyText(text, okMessage) {
+  const showManually = () => {
+    const box = el("share-fallback");
+    box.value = text;
+    box.hidden = false;
+    box.focus();
+    box.select();
+    flash("Could not copy automatically. The text is selected below, copy it from there.");
+  };
+  el("share-fallback").hidden = true;
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => flash(okMessage), showManually);
+  } else {
+    showManually();
+  }
+}
+
 /* ---------- events ---------- */
 
 function begin() {
   index = 0;
   answers = new Array(ITEMS.length).fill(null);
+  el("shared-banner").hidden = true;
+  try { history.replaceState(null, "", location.pathname); } catch (_) {}
   renderItem();
   show("quiz");
 }
@@ -306,6 +423,29 @@ el("scale").addEventListener("click", (e) => {
 el("back").addEventListener("click", () => {
   if (index > 0) { index -= 1; renderItem(); }
 });
+
+el("copy-link").addEventListener("click", () => {
+  if (lastResult) copyText(shareUrl(lastResult.raw), "Link copied.");
+});
+
+el("copy-text").addEventListener("click", () => {
+  if (lastResult) copyText(resultAsText(lastResult.raw), "Result copied.");
+});
+
+el("download").addEventListener("click", () => {
+  if (!lastResult) return;
+  const name = rankGenres(lastResult.raw)[0].genre.id;
+  const blob = new Blob([resultAsText(lastResult.raw)], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "reader-type-" + name + ".txt";
+  a.click();
+  URL.revokeObjectURL(url);
+  flash("Downloaded.");
+});
+
+el("take-it").addEventListener("click", begin);
 
 document.addEventListener("keydown", (e) => {
   if (screens.quiz.hidden) return;
@@ -436,3 +576,16 @@ function renderGenreOptions() {
 
 renderGenreOptions();
 renderLegend();
+
+/* A shared link opens on the result it encodes. An unreadable or outdated code
+   falls through to the intro rather than erroring, since a bad link should look
+   like an ordinary visit. */
+(function openSharedResult() {
+  const match = /^#r=([0-9a-z]+)$/i.exec(location.hash || "");
+  if (!match) return;
+  const raw = decodeResult(match[1]);
+  if (!raw) { try { history.replaceState(null, "", location.pathname); } catch (_) {} return; }
+  renderResult(raw);
+  el("shared-banner").hidden = false;
+  show("result");
+})();

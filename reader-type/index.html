@@ -60,6 +60,7 @@
 
   <!-- Result -->
   <section class="screen" id="screen-result" hidden>
+    <p class="shared-banner" id="shared-banner" hidden>You are looking at someone else's result. <button type="button" class="linklike" id="take-it">Take it yourself</button></p>
     <div class="result-head">
       <p class="eyebrow">Your closest match</p>
       <h2 id="result-name"></h2>
@@ -76,6 +77,18 @@
 
     <div class="subhead"><p class="eyebrow">Your profile</p><h3>What the answers said</h3></div>
     <div class="traits" id="traits"></div>
+
+    <div class="subhead"><p class="eyebrow">Keep it</p><h3>Save or share this result</h3></div>
+    <div class="share">
+      <p class="share-note">Your result lives in the link itself, so nothing is stored and nothing is sent. Copy it to keep, or send it to someone.</p>
+      <div class="share-actions">
+        <button type="button" class="btn btn-ghost" id="copy-link">Copy link</button>
+        <button type="button" class="btn btn-ghost" id="copy-text">Copy result</button>
+        <button type="button" class="btn btn-ghost" id="download">Download</button>
+      </div>
+      <p class="share-status" id="share-status" role="status"></p>
+      <textarea class="share-fallback" id="share-fallback" rows="6" readonly hidden aria-label="Your result as text"></textarea>
+    </div>
 
     <div class="subhead"><p class="eyebrow">Tell it what it got wrong</p><h3>Was this right?</h3></div>
     <div class="feedback">

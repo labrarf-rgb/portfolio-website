@@ -292,3 +292,26 @@ main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px;
   .runner[open] .books { grid-template-columns: 1fr 1fr 1fr; }
   .feedback-actions .btn { flex: none; }
 }
+
+/* ---- share ---- */
+.share-note { color: var(--soft); font-size: 1rem; }
+.share-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.share-actions .btn { font-size: .72rem; padding: 10px 18px; }
+.share-status { margin-top: 14px; font-size: .95rem; color: var(--accent); min-height: 1.5em; }
+
+.shared-banner {
+  font-size: .95rem; color: var(--soft);
+  border-left: 2px solid var(--accent); padding: 2px 0 2px 14px; margin-bottom: 28px;
+}
+.linklike {
+  font: inherit; color: var(--accent); background: none; border: 0; padding: 0;
+  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+}
+.linklike:hover { color: var(--accent-hover); }
+.share-fallback {
+  width: 100%; margin-top: 14px; font: inherit; font-size: .9rem;
+  line-height: 1.6; color: var(--ink); background: var(--card);
+  border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px;
+  resize: vertical;
+}
+.share-fallback:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

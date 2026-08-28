@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poem Type</title>
+<meta name="description" content="A short quiz that reads what you want from a line of poetry and suggests the poetic form most likely to suit you, with three poems in it and the rules for writing your own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <span class="wordmark">Poem Type</span>
+    <button type="button" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Intro -->
+  <section class="screen" id="screen-intro">
+    <div class="lede">
+      <p class="eyebrow">Twenty four statements</p>
+      <h1>Find the poetic form you did not know you were looking for.</h1>
+      <p>There are hundreds of poetic forms and almost no way to find the one that suits you, short of reading your way through all of them. This quiz asks twenty four short questions about what you want from a line, then matches you against twenty four forms, from the sonnet to the Burmese thanbauk.</p>
+      <p>You get one form, three poems in it worth your time, the rules in case you ever want to try writing one, and a shelf of four more that came close.</p>
+      <p>It takes about three minutes. Nothing is saved and nothing leaves your browser.</p>
+      <div class="intro-actions">
+        <button type="button" class="btn btn-primary" id="start">Begin</button>
+        <span class="intro-meta">No sign-in, no email.</span>
+      </div>
+    </div>
+
+    <div class="method">
+      <p class="eyebrow">What it measures</p>
+      <dl id="trait-legend"></dl>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="screen" id="screen-quiz" hidden>
+    <div class="progress-row">
+      <p class="eyebrow" id="item-kind" style="margin:0">Generally</p>
+      <p class="eyebrow" id="progress-label" style="margin:0;color:var(--faint)">1 of 24</p>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+    <h2 class="question" id="item-text"></h2>
+    <div class="scale" id="scale"></div>
+
+    <div class="quiz-actions">
+      <button type="button" class="btn btn-ghost" id="back">Back</button>
+      <span class="hint">Press 1 to 5, or click</span>
+    </div>
+  </section>
+
+  <!-- Result -->
+  <section class="screen" id="screen-result" hidden>
+    <p class="shared-banner" id="shared-banner" hidden>You are looking at someone else's result. <button type="button" class="linklike" id="take-it">Take it yourself</button></p>
+    <div class="result-head">
+      <p class="eyebrow">Your closest form</p>
+      <h2 id="result-name"></h2>
+      <p class="result-tagline" id="result-tagline"></p>
+    </div>
+    <p class="result-why" id="result-why"></p>
+    <p class="result-confidence" id="result-confidence" hidden></p>
+
+    <div class="subhead"><p class="eyebrow">Start here</p><h3>Three of them worth your time</h3></div>
+    <ul class="poems" id="poems" role="list"></ul>
+
+    <div class="result-pair">
+      <div>
+        <div class="subhead"><p class="eyebrow">How it is built</p><h3>If you ever want to write one</h3></div>
+        <div class="craft">
+          <p class="craft-line"><span class="craft-label">The rules</span><span id="rules-text"></span></p>
+          <p class="craft-line craft-prompt"><span class="craft-label">Try this</span><span id="prompt-text"></span></p>
+          <p class="craft-note" id="form-note" hidden></p>
+        </div>
+      </div>
+      <div>
+        <div class="subhead"><p class="eyebrow">What sits next to it</p><h3>Its family</h3></div>
+        <div class="family">
+          <p class="family-name" id="family-name"></p>
+          <p class="family-blurb" id="family-blurb"></p>
+          <ul class="family-mates" id="family-mates" role="list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="subhead"><p class="eyebrow">Also close</p><h3>The rest of your shelf</h3></div>
+    <div class="runners" id="shelf"></div>
+
+    <div class="subhead"><p class="eyebrow">Your profile</p><h3>What the answers said</h3></div>
+    <div class="traits" id="traits"></div>
+
+    <div class="subhead"><p class="eyebrow">Keep it</p><h3>Save or share this result</h3></div>
+    <div class="share">
+      <p class="share-note">Your result lives in the link itself, so nothing is stored and nothing is sent. Copy it to keep, or send it to someone.</p>
+      <div class="share-actions">
+        <button type="button" class="btn btn-ghost" id="copy-link">Copy link</button>
+        <button type="button" class="btn btn-ghost" id="copy-text">Copy result</button>
+        <button type="button" class="btn btn-ghost" id="download">Download</button>
+      </div>
+      <p class="share-status" id="share-status" role="status"></p>
+      <textarea class="share-fallback" id="share-fallback" rows="6" readonly hidden aria-label="Your result as text"></textarea>
+    </div>
+
+    <div class="subhead"><p class="eyebrow">Tell it what it got wrong</p><h3>Was this right?</h3></div>
+    <div class="feedback">
+      <p class="feedback-note">Most of what this model knows about a form is factual, but how funny or how private a form is are judgment calls. Answering here records your trait scores and this result so those calls can be fitted to real responses later. It is saved in this browser only, and nothing is sent anywhere.</p>
+      <div class="feedback-actions" id="verdicts">
+        <button type="button" class="btn btn-ghost" data-verdict="yes">Yes, that is me</button>
+        <button type="button" class="btn btn-ghost" data-verdict="close">Close, not quite</button>
+        <button type="button" class="btn btn-ghost" data-verdict="no">No, wrong</button>
+      </div>
+      <div class="feedback-correction" id="correction" hidden>
+        <label class="feedback-label" for="actual-form">Which would have been right?</label>
+        <select id="actual-form"></select>
+      </div>
+      <p class="feedback-status" id="feedback-status" role="status"></p>
+      <div class="feedback-data" id="feedback-data" hidden>
+        <button type="button" class="btn btn-ghost" id="export">Export responses</button>
+        <button type="button" class="btn btn-ghost" id="clear">Delete saved responses</button>
+      </div>
+    </div>
+
+    <p class="caveat">A note on honesty: this is entertainment with a real model underneath, not a validated instrument. Most of each form's profile is description rather than opinion, since a villanelle does repeat and a haiku is short, but how witty or how private a form is are judgment calls, and the catalog is twenty four forms out of hundreds. Treat the result as a good place to start looking, not a verdict.</p>
+
+    <div class="result-actions">
+      <button type="button" class="btn btn-ghost" id="restart">Take it again</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

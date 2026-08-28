@@ -1,0 +1,431 @@
+/* Tokens are the portfolio site's own, not a separate palette.
+
+   This app is served from www.labrarf.com/reader-type/, so the site's tokens
+   are ground truth for it: same warm paper background, same warm near-black
+   ink, same muted green accent, same 2px radius, same Raleway and Nunito
+   pairing. Clicking through from the case study should not feel like leaving
+   the site.
+
+   The quiz needs one surface more than the site defines, for the hover state
+   on option rows, so --panel maps to the site's --card-hover. Light has almost
+   no headroom above the card colour, which is why hovers there also carry the
+   warm shadow; dark gets a real step up in lightness instead.
+
+   Only one muted text colour exists on purpose. Anything lighter than #726c65
+   fails 4.5:1 against this background, so hierarchy below the ink comes from
+   size and weight rather than from a fainter grey. */
+:root, [data-theme="light"] {
+  --bg: #f7f3ec;
+  --card: #fefcf7;
+  --panel: #fffefb;
+  --ink: #24201b;
+  --soft: #726c65;
+  --faint: #726c65;
+  --line: #dfd8cc;
+  --rule: #dfd8cc;
+  --accent: #43664f;
+  --accent-hover: #35513f;
+  --shadow: 0 1px 2px rgba(70, 52, 20, .10), 0 6px 16px rgba(70, 52, 20, .08);
+}
+[data-theme="dark"] {
+  --bg: #1e1a14;
+  --card: #28231d;
+  --panel: #322d27;
+  --ink: #e2ddd7;
+  --soft: #a6a19a;
+  --faint: #a6a19a;
+  --line: #3c3731;
+  --rule: #3c3731;
+  --accent: #75a682;
+  --accent-hover: #8fbb9a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 26px rgba(0, 0, 0, .40);
+}
+
+/* One measure and one gutter for every element on the page, both growing with
+   the viewport. A fixed 760px column left roughly half of a 1440px screen
+   empty, so the column widens, and the type grows with it: widening a column
+   without growing the type just makes lines too long to read. Measured line
+   length across the prose blocks stays in the eighties rather than running to
+   113 characters as it did before.
+
+   Wide screens also gain from layout rather than from longer lines. Below,
+   poems, shelf entries and trait bars go two across once there is room, which
+   fills the width with content instead of stretching sentences. */
+:root {
+  --measure: 760px;
+  --gutter: 24px;
+  --font: 16px;
+}
+@media (min-width: 1100px) {
+  :root { --measure: 860px; --gutter: 32px; --font: 20px; }
+}
+@media (min-width: 1500px) {
+  :root { --measure: 960px; --gutter: 40px; --font: 21px; }
+}
+@media (max-width: 480px) {
+  :root { --gutter: 18px; }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-size: var(--font);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s ease, color .3s ease;
+}
+
+h1, h2, h3 {
+  font-family: 'Raleway', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0 0 1rem; }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute; left: -9999px;
+  background: var(--card); color: var(--ink);
+  padding: 8px 16px; z-index: 10; border-radius: 2px;
+}
+.skip-link:focus { left: 16px; top: 16px; }
+
+/* ---- eyebrow label, the signature move ---- */
+.eyebrow {
+  font-size: .72rem; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent);
+  margin: 0 0 .6rem;
+}
+
+/* ---- shell ---- */
+.site-header {
+  position: sticky; top: 0; z-index: 5;
+  height: 56px; display: flex; align-items: center;
+  background: var(--bg); border-bottom: 1px solid var(--rule);
+}
+.header-inner {
+  width: 100%; max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.wordmark {
+  font-family: 'Raleway', system-ui, sans-serif;
+  font-size: 1.05rem; letter-spacing: .02em;
+}
+
+main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter) 96px; }
+
+.screen { padding: 64px 0 0; }
+.screen[hidden] { display: none; }
+@media (max-width: 640px) { .screen { padding-top: 48px; } }
+
+/* ---- buttons ---- */
+.btn {
+  font: inherit; font-size: .8rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 12px 22px; border-radius: 2px; cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease, border-color .2s ease, color .2s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn-primary { background: var(--ink); color: var(--bg); border: 1px solid var(--ink); }
+.btn-primary:hover { opacity: .75; }
+.btn-ghost { background: transparent; color: var(--soft); border: 1px solid var(--line); }
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+.btn-ghost[disabled] { opacity: .4; cursor: not-allowed; }
+
+/* The site's own toggle: a 36px circle holding a moon in light and a sun in
+   dark. The round shape is the one place the 2px radius does not apply, which
+   matches the site and is the usual exception for a true toggle. */
+#theme-toggle {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--soft);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s ease, color .2s ease, background-color .2s ease;
+}
+#theme-toggle:hover {
+  border-color: var(--soft);
+  color: var(--ink);
+  background-color: var(--card);
+}
+#sun-icon { display: none; }
+[data-theme="dark"] #moon-icon { display: none; }
+[data-theme="dark"] #sun-icon { display: block; }
+
+/* ---- intro ---- */
+.lede h1 { font-size: clamp(2rem, 5vw, 2.9rem); margin-bottom: 1.2rem; }
+.lede p { color: var(--soft); }
+.intro-actions { margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.intro-meta { font-size: .85rem; color: var(--faint); }
+
+.method {
+  margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--rule);
+}
+.method dl { margin: 0; display: grid; gap: 14px; }
+.method dt {
+  font-size: .72rem; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent);
+}
+.method dd { margin: 2px 0 0; color: var(--soft); font-size: .95rem; }
+
+/* ---- quiz ---- */
+.progress-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; margin-bottom: 10px;
+}
+.progress-track { height: 2px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+
+.question { font-size: clamp(1.4rem, 3.4vw, 1.9rem); margin: 36px 0 28px; }
+
+.options { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.option {
+  display: block; width: 100%; text-align: left; font: inherit;
+  background: var(--card); color: var(--ink);
+  border: 0; padding: 18px 20px; cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.option:hover, .option:focus-visible { background: var(--panel); }
+.option .key {
+  display: inline-block; width: 1.6em; color: var(--faint);
+  font-size: .8rem; letter-spacing: .08em;
+}
+.option[aria-pressed="true"] { background: var(--panel); }
+.option[aria-pressed="true"] .key { color: var(--accent); }
+
+.quiz-actions { margin-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.hint { font-size: .8rem; color: var(--faint); }
+
+/* ---- result ---- */
+.result-head h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin: .2rem 0 .6rem; }
+.result-tagline { color: var(--soft); font-size: 1.05rem; }
+
+
+.subhead {
+  margin: 56px 0 20px; padding-top: 28px; border-top: 1px solid var(--rule);
+}
+.subhead h3 { font-size: 1.3rem; }
+
+.poems { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.poem { background: var(--card); padding: 18px 20px; }
+.poem-title { font-family: 'Raleway', system-ui, sans-serif; font-size: 1.15rem; }
+.poem-poet { color: var(--soft); font-size: .9rem; }
+.poem-note { margin: .5rem 0 0; color: var(--soft); font-size: .95rem; }
+.poem-link { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+
+.traits { display: grid; gap: 16px; margin: 0; }
+.trait-row { display: grid; gap: 6px; }
+.trait-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.trait-name { font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.trait-score { font-size: .8rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+.trait-track { height: 2px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+.trait-fill { height: 100%; background: var(--ink); width: 0; transition: width .4s ease; }
+.trait-blurb { font-size: .9rem; color: var(--soft); }
+
+.runners { display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.runner { background: var(--card); }
+.runner-head {
+  padding: 16px 20px; display: flex; justify-content: space-between; gap: 16px;
+  align-items: baseline; cursor: pointer; list-style: none;
+  transition: background .2s ease;
+}
+.runner-head::-webkit-details-marker { display: none; }
+.runner-head:hover { background: var(--panel); }
+.runner[open] .runner-head { border-bottom: 1px solid var(--rule); }
+.runner-name { font-family: 'Raleway', system-ui, sans-serif; font-size: 1.05rem; }
+.runner-name::after {
+  content: "+"; margin-left: .6em; color: var(--faint); font-family: inherit;
+}
+.runner[open] .runner-name::after { content: "\2013"; }
+.runner-body { padding: 4px 20px 20px; }
+.runner-tagline { color: var(--soft); font-size: .95rem; margin: 12px 0 14px; }
+.runner-body .poems { border: 1px solid var(--line); }
+.runner-body .poem { padding: 14px 16px; }
+.runner-match { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+
+.caveat { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--rule); color: var(--faint); font-size: .95rem; }
+
+.result-actions { margin-top: 32px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---- five point agree scale ---- */
+.scale { display: grid; gap: 1px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.scale-btn {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  text-align: left; font: inherit;
+  background: var(--card); color: var(--ink);
+  border: 0; padding: 16px 20px; cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.scale-btn:hover, .scale-btn:focus-visible { background: var(--panel); }
+.scale-btn[aria-pressed="true"] { background: var(--panel); }
+.scale-key {
+  flex: none; width: 26px; height: 26px; border-radius: 2px;
+  border: 1px solid var(--line); color: var(--faint);
+  display: grid; place-items: center;
+  font-size: .78rem; font-variant-numeric: tabular-nums;
+  transition: border-color .2s ease, color .2s ease;
+}
+.scale-btn:hover .scale-key { border-color: var(--ink); color: var(--ink); }
+.scale-btn[aria-pressed="true"] .scale-key { border-color: var(--accent); color: var(--accent); }
+.scale-label { font-size: .98rem; }
+
+/* Everything shares one measure, set on :root. Capping individual text blocks
+   at their own ch value was what made the right edge step in and out down the
+   page: a paragraph would stop at 556px while the card under it ran to 712. */
+#item-text { max-width: none; }
+
+
+/* ---- feedback ---- */
+.feedback-note { color: var(--soft); font-size: 1rem; }
+.feedback-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+.feedback-actions .btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.feedback-correction { margin-top: 18px; display: grid; gap: 8px; max-width: 340px; }
+.feedback-label {
+  font-size: .72rem; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent);
+}
+.feedback-correction select {
+  font: inherit; font-size: .95rem; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 2px; padding: 10px 12px;
+}
+.feedback-correction select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.feedback-status { margin-top: 14px; font-size: .9rem; color: var(--faint); min-height: 1.4em; }
+.feedback-data { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.feedback-data .btn { font-size: .72rem; padding: 9px 16px; }
+
+.result-confidence {
+  font-size: .98rem; color: var(--soft);
+  border-left: 2px solid var(--line); padding-left: 14px; margin-top: -.2rem;
+}
+
+
+/* ---- wide screens: use the width for content, not for line length ---- */
+@media (min-width: 1100px) {
+  /* Three poems, three columns. Two columns left the third alone on a
+     second row beside an empty cell, which read as a missing card rather than
+     as a deliberate layout. The row fills exactly instead. */
+  .poems { grid-template-columns: repeat(3, 1fr); }
+  /* Two runner-ups fill a two-column row exactly. */
+  .runners { grid-template-columns: 1fr 1fr; }
+  .traits { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  /* An opened shelf entry takes the full row so its own three poems can sit
+     three across like the main shelf. */
+  .runner[open] { grid-column: 1 / -1; }
+  .runner[open] .poems { grid-template-columns: repeat(3, 1fr); }
+  .feedback-actions .btn { flex: none; }
+}
+
+/* ---- share ---- */
+.share-note { color: var(--soft); font-size: 1rem; }
+.share-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.share-actions .btn { font-size: .72rem; padding: 10px 18px; }
+.share-status { margin-top: 14px; font-size: .95rem; color: var(--accent); min-height: 1.5em; }
+
+.shared-banner {
+  font-size: .95rem; color: var(--soft);
+  border-left: 2px solid var(--accent); padding: 2px 0 2px 14px; margin-bottom: 28px;
+}
+.linklike {
+  font: inherit; color: var(--accent); background: none; border: 0; padding: 0;
+  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+}
+.linklike:hover { color: var(--accent-hover); }
+.share-fallback {
+  width: 100%; margin-top: 14px; font: inherit; font-size: .9rem;
+  line-height: 1.6; color: var(--ink); background: var(--card);
+  border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px;
+  resize: vertical;
+}
+.share-fallback:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ---- the craft panel and the family ----
+
+   Two blocks the sibling app has no equivalent of. A form is a set of rules,
+   so the result has to say what they are, and a form is a narrow answer, so
+   the result has to say what sits next to it. Both are quieter than the poems
+   above them on purpose: the poems are the thing to act on today, these are
+   the things to come back to. */
+
+.craft {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 20px 22px;
+  display: grid;
+  gap: 14px;
+}
+.craft-line { margin: 0; color: var(--soft); font-size: .95rem; }
+.craft-label {
+  font-size: .72rem; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent);
+  display: block; margin-bottom: .3rem;
+}
+/* Set apart because it is the one line asking the reader to do something
+   rather than telling them about a form. */
+.craft-prompt {
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+  color: var(--ink);
+  font-style: italic;
+}
+.craft-note { color: var(--faint); font-size: .9rem; margin: 0; }
+
+.family {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 20px 22px;
+}
+.family-name { font-family: 'Raleway', system-ui, sans-serif; font-size: 1.15rem; margin: 0; }
+.family-blurb { color: var(--soft); font-size: .95rem; margin: .4rem 0 1rem; }
+.family-mates { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.family-mates li { display: grid; gap: 2px; padding-top: 10px; border-top: 1px solid var(--rule); }
+.mate-name { font-family: 'Raleway', system-ui, sans-serif; font-size: 1rem; }
+.mate-line { color: var(--soft); font-size: .9rem; }
+
+/* The rank number carries the ordering, which frees the right-hand slot for
+   the family label. Naming the family there means the shelf answers "why is
+   this one near me" as well as "what is near me". */
+.runner-rank {
+  font-size: .8rem; color: var(--faint); font-variant-numeric: tabular-nums;
+  min-width: 1.2em;
+}
+.runner-family {
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--faint); white-space: nowrap; margin-left: auto;
+}
+.runner-rules { color: var(--soft); font-size: .9rem; margin: 0 0 14px; }
+.runner-rules strong { color: var(--ink); font-weight: 500; }
+
+@media (min-width: 1100px) {
+  /* Two of the four shelf entries per row, and the craft panel beside the
+     family, since neither is long enough to want the full measure. */
+  .result-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+}

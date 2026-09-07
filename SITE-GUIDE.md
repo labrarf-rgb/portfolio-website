@@ -44,6 +44,11 @@ Just hand-written HTML files that share one stylesheet and one script.
      (`https://formspree.io/f/mlgvpwqy`). Only present on `index.html`. The
      standalone `contact.html` has its own inline copy of this logic and does
      not load `script.js`.
+
+  Both blocks are wrapped in a null check, because neither element is on every
+  page that loads this file. Keep that pattern for anything you add here: one
+  unguarded `getElementById` throws on the pages that lack the element, and
+  everything after it in the file stops running.
 - **Embedding apps.** Each showcased app is its own separately hosted site. The
   portfolio embeds it through a thin full-screen `iframe` wrapper page (see the
   two-page-per-project pattern below). The portfolio does not contain the apps'
@@ -609,3 +614,27 @@ Newest entries at the bottom.
   misleading. GitHub redirects the old URL and nothing on this site references
   the repo by name in code, so this is a documentation change only. References
   in section 4, section 10 and the log entries above were updated.
+
+### 2026-08-27 - Guard `script.js` against missing elements
+
+- **Fixed the `#contact-form` TypeError** logged as known and unfixed in the
+  Poem Type entry above. `script.js` called `addEventListener` on the result of
+  `getElementById('contact-form')` without checking it, and that element exists
+  only on `index.html`. Every other page loading the file (`projects.html` and
+  all seven case studies) threw "Cannot read properties of null" in the console
+  on load.
+- **It was harmless only by luck of ordering.** The contact form block was the
+  last thing in the `DOMContentLoaded` handler, so the theme toggle registered
+  above it still ran. Anything appended to the file would have been dead code on
+  those pages.
+- **Guarded the theme toggle the same way**, for symmetry and for the same
+  reason. `#theme-toggle` is on every page that loads `script.js` today, but the
+  four `*-app.html` embed pages have no header at all, so a future page without
+  one is plausible. The `aria-label` write inside the saved-preference branch is
+  guarded too, since it also touches the button.
+- **Verified in a local server.** Console is clean on `index.html`,
+  `projects.html`, `reader-type.html`, `poem-type.html` and `estoria.html`. The
+  theme toggle still flips `data-theme` and writes `localStorage` on a case
+  study page, and the contact form on `index.html` still intercepts its own
+  submit.
+- **No HTML or CSS changed.** This is `script.js` and this guide only.

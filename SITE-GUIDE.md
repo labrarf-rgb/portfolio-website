@@ -314,10 +314,12 @@ does not show, hard refresh (Cmd+Shift+R) or wait for the CDN to flush.
 | `pace-calculator` | Pace | https://www.labrarf.com/pace-calculator/ (same-origin copy, the only live URL; GitHub Pages is not enabled on the source repo) | No |
 | `reader-type` | Reader Type | https://www.labrarf.com/reader-type/ (same-origin copy, the only live URL; the source repo `labrarf-rgb/online-quiz` is private) | No |
 | `poem-type` | Poem Type | https://www.labrarf.com/poem-type/ (same-origin copy, the only live URL; shares the private `labrarf-rgb/online-quiz` source repo with Reader Type) | No |
+| `twentyq` | Twenty Q | https://www.labrarf.com/twentyq/ (same-origin copy, the only live URL; source repo `labrarf-rgb/twentyq`; privacy policy at https://www.labrarf.com/twentyq/privacy.html, also used by the Android app's Play listing) | No |
 
-All seven appear on `projects.html`. Featured on the home page is currently
-Estoria and UnifyCRM only. Reader Type and Poem Type sit deliberately last as a
-pair, in that order, and neither is featured.
+All eight appear on `projects.html`. Featured on the home page is currently
+Estoria and UnifyCRM only. Reader Type and Poem Type sit last as a pair, in that
+order, and Twenty Q now sits after them as the very last item, at Ray's request
+(2026-11-01). None of the three is featured.
 
 ---
 
@@ -638,3 +640,28 @@ Newest entries at the bottom.
   study page, and the contact form on `index.html` still intercepts its own
   submit.
 - **No HTML or CSS changed.** This is `script.js` and this guide only.
+
+### 2026-11-01 - Added Twenty Q; linked direct; placed last at Ray's request
+
+- **New project: Twenty Q** (`twentyq.html`), a twenty questions game on an
+  on-screen handheld toy. Source repo `labrarf-rgb/twentyq`, built output
+  served same-origin from `twentyq/` by `npm run deploy` in that repo, which
+  works exactly like Estoria's script (clean tree, lock, settle wait, kept
+  assets, live SHA poll).
+- **Linked direct, no `twentyq-app.html` wrapper.** It meets both halves of the
+  rule in section 5: it ships a manifest, and it keeps game stats and settings
+  in `localStorage`, which an iframe on another origin would partition. Both
+  "Open app" buttons on the case study point to `/twentyq/`.
+- **`projects.html`: added as the last `.project-list-item`, after Poem Type,**
+  at Ray's explicit request, instead of the usual top slot. Not featured on
+  `index.html`. The registry table and its closing note above were updated to
+  match.
+- **`twentyq/privacy.html` is a live URL other things depend on.** The Android
+  app's Google Play privacy policy points at
+  https://www.labrarf.com/twentyq/privacy.html, so do not move or rename it.
+  The deploy script mirrors `dist/` into `twentyq/`, so the page lives in the
+  app repo's `public/` folder, not here.
+- **Copy** claims only what is built: offline, 212 things and 128 questions, the
+  self-play check (with its limit stated), and "Android app coming to Google
+  Play", since it is not published yet.
+

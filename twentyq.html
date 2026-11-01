@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twenty Q | Ray Labra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none;">Ray Labra</a>
+            <div class="header-actions">
+                <a href="projects.html" class="social-link" aria-label="Projects" title="Projects">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/labrarf/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Project Header -->
+        <section class="section">
+            <a href="index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to portfolio
+            </a>
+
+            <span class="section-label">Featured Project</span>
+            <h1>Twenty Q</h1>
+
+            <div class="project-meta">
+                <span class="project-tag">Game</span>
+                <span class="project-tag">Web App</span>
+                <span class="project-tag">React</span>
+                <span class="project-tag">Android</span>
+            </div>
+
+            <a href="/twentyq/" target="_blank" class="btn btn-top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+
+            <p>Twenty Q is a twenty questions game that looks and sounds like a 90s handheld toy. You think of something, it asks questions, and it tries to guess what you picked within twenty.</p>
+
+            <p>I wanted to build the thing I remember playing: a round plastic gadget with a little green screen and four big buttons, which somehow seemed to read your mind. I wanted to find out how it could work, and then make it small enough to understand end to end.</p>
+
+            <h2>How it plays</h2>
+            <p>You answer each question with one of four buttons: Unknown, No, Yes or Sometimes. The buttons never change. All the guidance is on the screen, the way it was on the toy. It starts by asking whether your thing is an animal, a vegetable or a mineral, and those count as questions too. Then it asks about things like size, colour, where you find it and what it is made of. From turn 8 it will guess once it is confident enough, and from turn 20 every turn is a guess. If it misses at 20, it gets five more.</p>
+
+            <h2>How it picks a question</h2>
+            <p>Behind the screen is a hand-built knowledge base of 212 things and 128 questions. For every thing it holds an answer to every question: yes, no, sometimes, or unknown. After each of your answers it nudges the odds of every thing up or down rather than crossing anything off, so one wrong answer from you does not end the game.</p>
+            <p>To choose the next question it works out which one would split the remaining possibilities most evenly, which is the same idea as the classic information gain measure. It picks from the best three rather than always the single best, so two games about the same thing do not run the same way.</p>
+
+            <h2>What I checked, and what that does not show</h2>
+            <p>I wrote a script that plays the game itself, once for every thing in the knowledge base, five times each. When it answers truthfully, the app guesses correctly within twenty questions 99.7% of the time. When one answer in ten is deliberately wrong, it still gets there within twenty five turns 99.3% of the time.</p>
+            <p>Those numbers come from a simulated player that answers from the same knowledge base, so they show that the engine is consistent, not that every real person would answer every question the way I did. The real test is whether it can guess your thing, and when it cannot, that usually points at an answer I got wrong in the knowledge base.</p>
+
+            <h2>What it does</h2>
+            <ul>
+                <li><strong>Plays like the toy.</strong> A round shell, a dot matrix screen that types out its questions, four fixed buttons, undo, and small synthesized beeps you can mute.</li>
+                <li><strong>Works offline.</strong> The questions and the knowledge base are built in. There is no server, no account and no analytics.</li>
+                <li><strong>Keeps almost nothing.</strong> Only your game stats, your sound setting and your theme, stored on your own device.</li>
+                <li><strong>Undo goes back one turn.</strong> Including a guess. The game replays from the start, so it picks up exactly where it was.</li>
+                <li><strong>Light and dark, and the keyboard.</strong> Answer with U, N, Y and S, undo with Backspace.</li>
+                <li><strong>Fits the screen.</strong> It scales from a small phone to a large desktop window without scrolling.</li>
+            </ul>
+
+            <h2>How it's built</h2>
+            <p>The web app is React, TypeScript and Vite. The guessing engine is a small piece of plain TypeScript with no screen code in it, which is what let me test it on its own. It is a pure function of the knowledge base, a random seed and your answers, so undo is just replaying the game with one answer fewer.</p>
+            <p>There is also an Android version, built on the same knowledge base and the same engine rules. Android app coming to Google Play. The web version is the reference for both.</p>
+
+            <h2>The honest caveat</h2>
+            <p>It is a game, not a mind reader. It knows 212 things, so if you think of something outside that list it can only guess the nearest thing it knows. It does not learn from its misses, and I would rather say so than imply it does.</p>
+        </section>
+
+        <!-- CTA -->
+        <section class="embed-section">
+            <span class="section-label">Live Demo</span>
+            <h2>Try it yourself</h2>
+            <p>Think of an animal, an object or a plant, and press Yes to start. It usually takes ten to fifteen questions. Try something odd and see how close it gets.</p>
+            <a href="/twentyq/" target="_blank" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Open app
+            </a>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

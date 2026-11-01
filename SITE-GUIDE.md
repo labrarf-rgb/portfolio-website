@@ -643,8 +643,8 @@ Newest entries at the bottom.
 
 ### 2026-11-01 - Added Twenty Q; linked direct; placed last at Ray's request
 
-- **New project: Twenty Q** (`twentyq.html`), a twenty questions game on an
-  on-screen handheld toy. Source repo `labrarf-rgb/twentyq`, built output
+- **New project: Twenty Q** (`twentyq.html`), a twenty questions game styled
+  like a 90s electronic toy. Source repo `labrarf-rgb/twentyq`, built output
   served same-origin from `twentyq/` by `npm run deploy` in that repo, which
   works exactly like Estoria's script (clean tree, lock, settle wait, kept
   assets, live SHA poll).

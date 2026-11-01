@@ -661,7 +661,18 @@ Newest entries at the bottom.
   https://www.labrarf.com/twentyq/privacy.html, so do not move or rename it.
   The deploy script mirrors `dist/` into `twentyq/`, so the page lives in the
   app repo's `public/` folder, not here.
-- **Copy** claims only what is built: offline, 212 things and 128 questions, the
+- **Copy** claims only what is built: offline, 994 things and 168 questions, the
   self-play check (with its limit stated), and "Android app coming to Google
   Play", since it is not published yet.
 
+
+### 2026-11-01 - Twenty Q: clearer blurb, bigger knowledge base
+
+- **projects.html blurb rewritten** (`37f918d`). The old opener, "A twenty questions
+  game on a handheld toy", didn't read well, and it called the answer buttons
+  "questions". It now leads with what you do, says it plays like a 90s electronic
+  toy, and no longer hard-codes the thing count, so it won't go stale.
+- **Case study numbers updated** for the knowledge base growing from 212 to 994
+  things and from 128 to 168 questions. The self-play results are now 98.6% within
+  twenty questions with truthful answers, and 92.7% within twenty five with 10%
+  noise.

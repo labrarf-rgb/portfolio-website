@@ -85,11 +85,11 @@
             <p>You answer each question with one of four buttons: Unknown, No, Yes or Sometimes. The buttons never change. All the guidance is on the screen, the way it was on the toy. It starts by asking whether your thing is an animal, a vegetable or a mineral, and those count as questions too. Then it asks about things like size, colour, where you find it and what it is made of. From turn 8 it will guess once it is confident enough, and from turn 20 every turn is a guess. If it misses at 20, it gets five more.</p>
 
             <h2>How it picks a question</h2>
-            <p>Behind the screen is a hand-built knowledge base of 212 things and 128 questions. For every thing it holds an answer to every question: yes, no, sometimes, or unknown. After each of your answers it nudges the odds of every thing up or down rather than crossing anything off, so one wrong answer from you does not end the game.</p>
+            <p>Behind the screen is a hand-built knowledge base of 994 things and 168 questions. For every thing it holds an answer to every question: yes, no, sometimes, or unknown. After each of your answers it nudges the odds of every thing up or down rather than crossing anything off, so one wrong answer from you does not end the game.</p>
             <p>To choose the next question it works out which one would split the remaining possibilities most evenly, which is the same idea as the classic information gain measure. It picks from the best three rather than always the single best, so two games about the same thing do not run the same way.</p>
 
             <h2>What I checked, and what that does not show</h2>
-            <p>I wrote a script that plays the game itself, once for every thing in the knowledge base, five times each. When it answers truthfully, the app guesses correctly within twenty questions 99.7% of the time. When one answer in ten is deliberately wrong, it still gets there within twenty five turns 99.3% of the time.</p>
+            <p>I wrote a script that plays the game itself, once for every thing in the knowledge base, five times each. When it answers truthfully, the app guesses correctly within twenty questions 98.6% of the time. When one answer in ten is deliberately wrong, it still gets there within twenty five turns 92.7% of the time.</p>
             <p>Those numbers come from a simulated player that answers from the same knowledge base, so they show that the engine is consistent, not that every real person would answer every question the way I did. The real test is whether it can guess your thing, and when it cannot, that usually points at an answer I got wrong in the knowledge base.</p>
 
             <h2>What it does</h2>
@@ -107,7 +107,7 @@
             <p>There is also an Android version, built on the same knowledge base and the same engine rules. Android app coming to Google Play. The web version is the reference for both.</p>
 
             <h2>The honest caveat</h2>
-            <p>It is a game, not a mind reader. It knows 212 things, so if you think of something outside that list it can only guess the nearest thing it knows. It does not learn from its misses, and I would rather say so than imply it does.</p>
+            <p>It is a game, not a mind reader. It knows 994 things, so if you think of something outside that list it can only guess the nearest thing it knows. It does not learn from its misses, and I would rather say so than imply it does.</p>
         </section>
 
         <!-- CTA -->

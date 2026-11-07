@@ -676,3 +676,7 @@ Newest entries at the bottom.
   things and from 128 to 168 questions. The self-play results are now 98.6% within
   twenty questions with truthful answers, and 92.7% within twenty five with 10%
   noise.
+
+### 2026-11-07 · Twenty Q case study rewritten for product, not tech
+- At Ray's request, `twentyq.html` now tells the product story: what the game is and is not, the "buttons never change" rule, the counting rule, the feel fixes from playtesting, and why it's fun to try. The engine, knowledge-base and benchmark sections are gone, and so are the numbers, so it won't go stale as the knowledge base grows.
+- The stack tag `React` became `Product`. The two lines that had stopped being true since the v9 web deploy ("keeps almost nothing" and "does not learn") went with the technical sections. The new learning features are deliberately not described.

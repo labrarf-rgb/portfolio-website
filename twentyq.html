@@ -64,7 +64,7 @@
             <div class="project-meta">
                 <span class="project-tag">Game</span>
                 <span class="project-tag">Web App</span>
-                <span class="project-tag">React</span>
+                <span class="project-tag">Product</span>
                 <span class="project-tag">Android</span>
             </div>
 
@@ -77,38 +77,34 @@
                 Open app
             </a>
 
-            <p>Twenty Q is a twenty questions game that looks and sounds like a 90s handheld toy. You think of something, it asks questions, and it tries to guess what you picked within twenty.</p>
+            <p>Twenty Q is a twenty questions game dressed up as a 90s handheld toy. You think of something, it asks questions, and it tries to guess what you picked within twenty.</p>
+                <p>I remember a round plastic gadget with a little green screen and four big buttons that somehow seemed to read your mind. I wanted that feeling back, and I wanted to run the project like a real product: decide what it is, decide what it is not, and keep playing it until it felt right.</p>
 
-            <p>I wanted to build the thing I remember playing: a round plastic gadget with a little green screen and four big buttons, which somehow seemed to read your mind. I wanted to find out how it could work, and then make it small enough to understand end to end.</p>
+                <h2>Deciding what it is</h2>
+                <p>The first plan was a tidy quiz app: a clean screen and a row of answer buttons. Once I saw a picture of the old toy next to it, I dropped that. The fun of the original was holding a little machine, so the app became one. It has a round shell, a dot matrix screen that types out its questions, chunky buttons and small beeps you can mute. I kept it an original design rather than copying the old toy's logo or shape, and coloured it in the warm, papery palette I use across my projects.</p>
+                <p>I cut things on purpose too. There is one mode, where the app does the guessing. There are no accounts and no ads, and it works offline, so you open it and play.</p>
 
-            <h2>How it plays</h2>
-            <p>You answer each question with one of four buttons: Unknown, No, Yes or Sometimes. The buttons never change. All the guidance is on the screen, the way it was on the toy. It starts by asking whether your thing is an animal, a vegetable or a mineral, and those count as questions too. Then it asks about things like size, colour, where you find it and what it is made of. From turn 8 it will guess once it is confident enough, and from turn 20 every turn is a guess. If it misses at 20, it gets five more.</p>
+                <h2>The rule I held the line on</h2>
+                <p>An early build changed the buttons as the game went on, relabelling them for the opening question and dimming the ones that did not apply. It was easier to build that way, and it felt like cheating. The toy never did that. So the rule became that the four buttons never change: Unknown, No, Yes and Sometimes, every turn, with everything else on the little screen. A lot of later decisions came straight out of that one.</p>
+                <p>Playing it turned up the next rule. The opening walked through animal, vegetable and mineral as separate prompts but counted them as a single question, which made the count of twenty feel dishonest. Now each one counts, the way you would count them out loud.</p>
 
-            <h2>How it picks a question</h2>
-            <p>Behind the screen is a hand-built knowledge base of 994 things and 168 questions. For every thing it holds an answer to every question: yes, no, sometimes, or unknown. After each of your answers it nudges the odds of every thing up or down rather than crossing anything off, so one wrong answer from you does not end the game.</p>
-            <p>To choose the next question it works out which one would split the remaining possibilities most evenly, which is the same idea as the classic information gain measure. It picks from the best three rather than always the single best, so two games about the same thing do not run the same way.</p>
+                <h2>Small things that took the most rounds</h2>
+                <p>Most of my notes were about feel, not features. Long questions spilled off the screen, so every message the game can show now has to fit before anything ships. The toy looked lost in a big desktop window, so it grows to fill the space. On Android it started out off centre, and that got fixed too. I also asked how the knowledge compared with the original toy, which knew a couple of thousand things, and grew the list several times over so it has a fair chance with whatever you pick.</p>
 
-            <h2>What I checked, and what that does not show</h2>
-            <p>I wrote a script that plays the game itself, once for every thing in the knowledge base, five times each. When it answers truthfully, the app guesses correctly within twenty questions 98.6% of the time. When one answer in ten is deliberately wrong, it still gets there within twenty five turns 92.7% of the time.</p>
-            <p>Those numbers come from a simulated player that answers from the same knowledge base, so they show that the engine is consistent, not that every real person would answer every question the way I did. The real test is whether it can guess your thing, and when it cannot, that usually points at an answer I got wrong in the knowledge base.</p>
+                <h2>Why it is fun to try</h2>
+                <p>The fun is watching it close in. Answer Sometimes when it honestly depends and Unknown when you have no idea; it can shrug off a wrong answer or two. If it misses at twenty it asks for five more, like the original did, and if you still beat it, it tells you what it was considering. Then you want to try something harder.</p>
 
-            <h2>What it does</h2>
-            <ul>
-                <li><strong>Plays like the toy.</strong> A round shell, a dot matrix screen that types out its questions, four fixed buttons, undo, and small synthesized beeps you can mute.</li>
-                <li><strong>Works offline.</strong> The questions and the knowledge base are built in. There is no server, no account and no analytics.</li>
-                <li><strong>Keeps almost nothing.</strong> Only your game stats, your sound setting and your theme, stored on your own device.</li>
-                <li><strong>Undo goes back one turn.</strong> Including a guess. The game replays from the start, so it picks up exactly where it was.</li>
-                <li><strong>Light and dark, and the keyboard.</strong> Answer with U, N, Y and S, undo with Backspace.</li>
-                <li><strong>Fits the screen.</strong> It scales from a small phone to a large desktop window without scrolling.</li>
-            </ul>
+                <h2>What it does</h2>
+                <ul>
+                    <li><strong>Plays like the toy.</strong> A round shell, a screen that types out each question, four big buttons and small synthesized beeps.</li>
+                    <li><strong>Four buttons that never change.</strong> All the guidance is on the screen, the way it was on the original.</li>
+                    <li><strong>Undo.</strong> Step back one turn, guesses included, and pick up exactly where you were.</li>
+                    <li><strong>Nothing to sign up for.</strong> It works offline, with no account and no ads.</li>
+                    <li><strong>Fits any screen.</strong> From a small phone to a large desktop window, in light or dark, and you can play with the keyboard (U, N, Y, S).</li>
+                    <li><strong>On Android too.</strong> The same game as a phone app. Android app coming to Google Play.</li>
+                </ul>
 
-            <h2>How it's built</h2>
-            <p>The web app is React, TypeScript and Vite. The guessing engine is a small piece of plain TypeScript with no screen code in it, which is what let me test it on its own. It is a pure function of the knowledge base, a random seed and your answers, so undo is just replaying the game with one answer fewer.</p>
-            <p>There is also an Android version, built on the same knowledge base and the same engine rules. Android app coming to Google Play. The web version is the reference for both.</p>
-
-            <h2>The honest caveat</h2>
-            <p>It is a game, not a mind reader. It knows 994 things, so if you think of something outside that list it can only guess the nearest thing it knows. It does not learn from its misses, and I would rather say so than imply it does.</p>
-        </section>
+            </section>
 
         <!-- CTA -->
         <section class="embed-section">

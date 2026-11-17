@@ -81,6 +81,7 @@ The embed page is tiny and identical across projects except for `<title>`, the
 | `drifts-calculator.html` / `drifts-calculator-app.html` | Case study + embed: DRIFTS Calculator |
 | `customer-health-score.html` / `customer-health-score-app.html` | Case study + embed: Customer Health Score Dashboard |
 | `contact.html` | Standalone, self-contained contact form (served at `/contact`). Reusable in other webapps and Android WebViews. Not linked from site nav. |
+| `privacy.html` | Catch-all privacy policy, reusable by every current and future app and web app (served at `/privacy`). Deliberately names no app, so a new project can point at it with no edit. Standalone and self-contained, inline CSS, system fonts, no `styles.css` or `script.js`, so it loads cleanly in a bare tab or an Android WebView. Safe to paste into a Google Play listing. Not linked from site nav. The older per-app policies (`estoria/privacy.html`, `twentyq/privacy.html`) stay as they are, since their store listings already point at those URLs. |
 | `styles.css` | Shared styles + design tokens |
 | `script.js` | Shared theme toggle + contact form |
 | `CNAME` | Custom domain (`www.labrarf.com`) |
@@ -680,3 +681,53 @@ Newest entries at the bottom.
 ### 2026-11-07 · Twenty Q case study rewritten for product, not tech
 - At Ray's request, `twentyq.html` now tells the product story: what the game is and is not, the "buttons never change" rule, the counting rule, the feel fixes from playtesting, and why it's fun to try. The engine, knowledge-base and benchmark sections are gone, and so are the numbers, so it won't go stale as the knowledge base grows.
 - The stack tag `React` became `Product`. The two lines that had stopped being true since the v9 web deploy ("keeps almost nothing" and "does not learn") went with the technical sections. The new learning features are deliberately not described.
+
+### 2026-11-16 - Added a catch-all privacy policy
+
+- **New `privacy.html` at the root**, served at `/privacy`. It is the default
+  policy for current and future Android apps and web apps that do not ship a
+  policy of their own, and it is the URL to paste into a Google Play listing
+  when an app has nothing more specific.
+- **Standalone on purpose.** Inline CSS, system fonts, no `styles.css` and no
+  `script.js`, the same reasoning as `contact.html`: a Play policy link often
+  opens in a WebView or a bare tab and should not depend on site chrome or a
+  font service. It follows the per-app pages' shape (eyebrow, h1, updated date,
+  summary card, sections) and respects `prefers-color-scheme`.
+- **Names no app on purpose.** It is a catch-all: a new project points at
+  `/privacy.html` without this page needing an edit.
+- **It permits analytics, by Ray's instruction.** It does not promise that
+  nothing is ever collected, which would stop being true the first time an app
+  ships Firebase or Google Analytics. It splits the two cases: your *content*
+  stays on your device, full stop, while usage and diagnostic data "may" be
+  collected, with the usual categories spelled out (version, device, OS,
+  coarse region from IP, usage events, crash logs, a random install id or
+  cookie). So turning analytics on in a future app needs no edit here. Keep
+  that "may" phrasing if you revise the page.
+- **It names no analytics provider**, by Ray's instruction: the tool is not
+  chosen yet, and naming one would date the page. It says only that a provider
+  may act on Ray's behalf and that an app using one will identify it, in the
+  app or in its own policy. Do not add a vendor name here; put it in that
+  app's own notice. The one named service that stays is Google Play, whose
+  aggregate install and crash stats arrive automatically, chosen or not.
+- **The two existing per-app policies are untouched.** `estoria/privacy.html`
+  and `twentyq/privacy.html` stay as they are, because their store listings
+  already link those exact URLs. This page is for everything else.
+- **Names Ray, and carries no postal address.** The controller line is "made
+  by Ray Labra, an independent developer working alone, and published under the
+  name labrarf". We tried labrarf alone first; Ray put the name back, since the
+  rest of the site already carries it and GDPR wants an identifiable
+  controller. The rule that matters is the other half: no postal address in
+  this file, ever. If Play ever forces an address onto the listing, use a PO
+  box or a mail service, not a home address.
+- **Also carries the standard legal furniture:** a controller line, a
+  consent sentence for non-essential cookies, retention, access and deletion
+  rights with GDPR and CCPA named, a children-under-13 clause, and a changes
+  clause. Deletion and rights requests go to `info@labrarf.com`, so that inbox
+  has to be read.
+- **Covers what is actually true today:** GitHub Pages hosting, Google Fonts
+  (`styles.css` and the same-origin app copies load Raleway and Nunito from it),
+  Google Play distribution and Android device backup, and Formspree for the
+  contact form. A grep of the root site found no analytics or tracking script
+  as of this entry, which is what lets the page describe analytics as a
+  possibility rather than a fact.
+- Not linked from the nav. Add a footer link later if the site ever gets one.

@@ -26,7 +26,10 @@ live, embedded demo.
 ## 2. How it works (stack)
 
 Plain static site. No framework, no bundler, no dependencies, no package.json.
-Just hand-written HTML files that share one stylesheet and one script.
+Just hand-written HTML files that share one stylesheet and one script. Two
+pages opt out of that on purpose, `contact.html` and `privacy.html`: both are
+fully self-contained so they can be opened in a bare tab or an Android WebView
+(see their notes in section 5).
 
 - **`styles.css`** - all styling for every page. Design tokens are CSS variables
   on `:root` (light) and `[data-theme="dark"]` (dark). Fonts are Google Fonts
@@ -158,6 +161,27 @@ a configurable endpoint via `?form=<id>`, and optional prefill via
 When you change the shared form or tokens, remember this page has its own copy
 and will not pick up edits to `styles.css` / `script.js` automatically.
 
+### `privacy.html` (catch-all privacy policy)
+The second standalone page, and self-contained for the same reason as
+`contact.html`: a Google Play policy link often opens in a bare tab or an
+Android WebView, where site chrome and a font service are liabilities. All CSS
+is inline, it uses system fonts (no Google Fonts at all), and it loads neither
+`styles.css` nor `script.js`. It is **not** linked from the site nav; it is
+reached directly at `/privacy`.
+
+It differs from `contact.html` in one deliberate way: because it has no theme
+toggle and no `script.js`, it follows the device's `prefers-color-scheme`
+instead of the shared `localStorage["theme"]` key. Its palette is copied from
+the per-app policy pages, not from `styles.css`, so a site palette change does
+not reach it.
+
+Two rules for editing it:
+
+1. **It must stay app-agnostic.** It names no app and no analytics vendor, so
+   a new project can point at it with no edit here. Anything app-specific
+   belongs in that app's own notice.
+2. **No postal address, ever.** See the 2026-11-16 Session Log entry.
+
 ### Embed page (`<slug>-app.html`)
 A self-contained page with inline `<style>` that makes a single `<iframe>` fill
 the viewport (`width/height: 100%`, no border, `overflow: hidden`). Only the
@@ -282,8 +306,13 @@ same-origin from `/poem-type/`.
 5. **(Optional) Feature it on `index.html`.** Add an `a.card-link > .card`
    (`h3` + `p`) to the Featured Projects `.grid`. Because the grid is 2-up, drop
    or rotate an existing card rather than letting it overflow.
-6. **Check:** no em dashes, all links resolve, theme toggle still works.
-7. **Deploy:** commit and push to `main`.
+6. **Point its privacy policy at `https://www.labrarf.com/privacy.html`** if
+   the project ships as an app with a store listing. That page is the catch-all
+   and needs no edit to cover a new app. Only write a per-app policy when the
+   app does something the catch-all does not describe, such as connecting a
+   cloud account, the way Estoria and Twenty Q do.
+7. **Check:** no em dashes, all links resolve, theme toggle still works.
+8. **Deploy:** commit and push to `main`.
 
 ## 8. Playbook: edit an existing page
 

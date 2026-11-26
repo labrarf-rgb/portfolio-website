@@ -348,6 +348,7 @@ does not show, hard refresh (Cmd+Shift+R) or wait for the CDN to flush.
 | Slug | Title | Live app URL | Featured on home? |
 | --- | --- | --- | --- |
 | `estoria` | Estoria | https://www.labrarf.com/estoria/ (same-origin copy; source also live at https://labrarf-rgb.github.io/estoria/) | Yes |
+| `ttepub` | TTePub | https://www.labrarf.com/ttepub/ (same-origin copy, the only live URL; source repo `labrarf-rgb/ttepub` is private, so the case study does not link it) | No |
 | `unifycrm` | UnifyCRM | https://unifycrm.vercel.app/ | Yes |
 | `drifts-calculator` | DRIFTS Calculator | https://labrarf-rgb.github.io/drifts-calculator/ | No |
 | `customer-health-score` | Customer Health Score Dashboard | https://labrarf-rgb.github.io/customer-health-score/ | No |
@@ -355,11 +356,10 @@ does not show, hard refresh (Cmd+Shift+R) or wait for the CDN to flush.
 | `reader-type` | Reader Type | https://www.labrarf.com/reader-type/ (same-origin copy, the only live URL; the source repo `labrarf-rgb/online-quiz` is private) | No |
 | `poem-type` | Poem Type | https://www.labrarf.com/poem-type/ (same-origin copy, the only live URL; shares the private `labrarf-rgb/online-quiz` source repo with Reader Type) | No |
 | `twentyq` | Twenty Q | https://www.labrarf.com/twentyq/ (same-origin copy, the only live URL; source repo `labrarf-rgb/twentyq`; privacy policy at https://www.labrarf.com/twentyq/privacy.html, also used by the Android app's Play listing) | No |
-| `ttepub` | TTePub | https://www.labrarf.com/ttepub/ (same-origin copy, the only live URL; source repo `labrarf-rgb/ttepub` is private, so the case study does not link it) | No |
 
 All nine appear on `projects.html`. Featured on the home page is currently
-Estoria and UnifyCRM only. TTePub sits directly below Estoria, per the
-new-project rule in section 5. Reader Type and Poem Type sit last as a pair, in that
+Estoria and UnifyCRM only. TTePub sits immediately after Estoria, at Ray's
+request (2026-11-26), and its registry row follows Estoria's to match. Reader Type and Poem Type sit last as a pair, in that
 order, and Twenty Q now sits after them as the very last item, at Ray's request
 (2026-11-01). None of the three is featured.
 
@@ -780,8 +780,8 @@ Newest entries at the bottom.
   same-origin from `ttepub/` by `npm run deploy` in the `labrarf-rgb/ttepub`
   repo (private, so not linked). Linked direct, no `ttepub-app.html` wrapper:
   it ships a manifest and keeps its library in IndexedDB (section 5).
-- **Placed directly below Estoria** on `projects.html`, per the new-project
-  rule. Not featured on the home page.
+- **Placed immediately after Estoria** on `projects.html`, at Ray's request
+  (the registry row follows Estoria's too). Not featured on the home page.
 - **First case study with screenshots.** Four WebP images in `images/ttepub/`,
   taken from the live app with only the public domain sample (The Masque of the
   Red Death) or an empty library: first run (light), typing (light), typing

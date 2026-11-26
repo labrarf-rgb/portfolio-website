@@ -409,6 +409,29 @@ li::before {
     margin-bottom: 1.5rem;
 }
 
+/* Screenshots inside a case study (first used by ttepub.html). */
+.case-shot {
+    margin: 2rem 0;
+}
+
+.case-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+}
+
+.case-shot figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.case-shot + h2 {
+    margin-top: 2.75rem;
+}
+
 .embed-wrapper {
     width: 100%;
     border: 1px solid var(--border);
